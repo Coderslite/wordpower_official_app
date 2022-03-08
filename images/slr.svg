@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+    xmlns:cc="http://creativecommons.org/ns#"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:svg="http://www.w3.org/2000/svg"
+    xmlns:ns1="http://sozi.baierouge.fr"
+    id="svg2"
+    sodipodi:docname="New document 1"
+    viewBox="0 0 419.72 327.13"
+    version="1.1"
+    inkscape:version="0.47 r22583"
+  >
+  <defs
+      id="defs4"
+    >
+    <linearGradient
+        id="linearGradient3756"
+        y2="569.51"
+        gradientUnits="userSpaceOnUse"
+        x2="429.06"
+        y1="535.67"
+        x1="430.83"
+        inkscape:collect="always"
+      >
+      <stop
+          id="stop3722"
+          style="stop-color:#ffffff"
+          offset="0"
+      />
+      <stop
+          id="stop3724"
+          style="stop-color:#3f3f3f;stop-opacity:0"
+          offset="1"
+      />
+    </linearGradient
+    >
+  </defs
+  >
+  <sodipodi:namedview
+      id="base"
+      bordercolor="#666666"
+      inkscape:pageshadow="2"
+      inkscape:window-y="0"
+      pagecolor="#ffffff"
+      inkscape:window-height="1099"
+      inkscape:window-maximized="0"
+      inkscape:zoom="0.98994949"
+      inkscape:window-x="0"
+      showgrid="false"
+      borderopacity="1.0"
+      inkscape:current-layer="layer1"
+      inkscape:cx="144.3249"
+      inkscape:cy="213.51029"
+      inkscape:window-width="1909"
+      inkscape:pageopacity="0.0"
+      inkscape:document-units="px"
+  />
+  <g
+      id="layer1"
+      inkscape:label="Layer 1"
+      inkscape:groupmode="layer"
+      transform="translate(-160.11 -371.01)"
+    >
+    <g
+        id="g3728"
+      >
+      <path
+          id="path2892"
+          style="fill:#666666"
+          d="m238.21 441.65-0.71-18.93s24.286-21.429 74.286-7.5l2.8572 22.143-76.429 4.2857z"
+      />
+      <rect
+          id="rect3700"
+          style="fill:#292929"
+          height="23.929"
+          width="4.6429"
+          y="420.93"
+          x="243.21"
+      />
+      <rect
+          id="rect3702"
+          style="fill:#292929"
+          height="23.929"
+          width="4.6429"
+          y="416.65"
+          x="258.93"
+      />
+      <rect
+          id="rect3704"
+          style="fill:#292929"
+          height="23.929"
+          width="4.6429"
+          y="414.86"
+          x="266.43"
+      />
+      <rect
+          id="rect3706"
+          style="fill:#292929"
+          height="23.929"
+          width="4.6429"
+          y="414.51"
+          x="275"
+      />
+      <rect
+          id="rect3708"
+          style="fill:#292929"
+          height="23.929"
+          width="4.6429"
+          y="418.79"
+          x="251.43"
+      />
+      <rect
+          id="rect3710"
+          style="fill:#292929"
+          height="23.929"
+          width="4.6429"
+          y="414.86"
+          x="283.21"
+      />
+      <rect
+          id="rect3712"
+          style="fill:#292929"
+          height="23.929"
+          width="4.6429"
+          y="415.58"
+          x="291.79"
+      />
+      <rect
+          id="rect3714"
+          style="fill:#292929"
+          height="23.929"
+          width="4.6429"
+          y="417.36"
+          x="300"
+      />
+      <path
+          id="path2890"
+          style="fill:#333333"
+          d="m161.62 490.21-1.5152 133.34v48.487s0.50507 24.749 27.779 25.759c27.274 1.0102 34.345-0.50508 34.345-0.50508l17.678-2.5254 14.142 1.0102 311.63 0.50508s12.627-4.5457 12.627-13.132 1.5152-192.43 1.5152-192.43l-3.5355-5.0508s-4.5457-34.345-32.83-43.942c-28.284-9.5964-30.305-8.5863-30.305-8.5863s-22.223-7.0711-29.294-50.003c0 0-2.5254-12.122-26.264-12.122h-89.904s-14.142 0.50508-22.728 15.657c-8.5863 15.152-11.617 30.305-11.617 30.305s-10.607 14.647-18.688 15.152c-8.0812 0.50508-77.277 7.0711-77.277 7.0711l-48.487 7.5761s-24.244 9.0914-27.274 43.437z"
+      />
+      <path
+          id="path2894"
+          style="fill:#242424"
+          d="m353.93 401.65 11.786-22.143s80.357-7.8571 107.5 1.7857l8.9286 19.286-6.7857 4.6428-93.571-0.35714-27.857-3.2143z"
+      />
+      <path
+          id="path2896"
+          style="fill:#292929"
+          d="m169.64 488.43c6.4286 0.71429 91.786 1.7857 91.786 1.7857s8.5714 8.5714 7.1429 17.143c0 0 0.35714 13.571-13.571 14.643l-6.4286 6.0714-2.1429 148.57s-45.357 21.071-75.714-2.1429l-1.0714-186.07z"
+      />
+      <path
+          id="path2898"
+          style="fill:#545454"
+          d="m175.71 468.08s1.0714-16.786 31.429-18.571c30.357-1.7857 32.143-0.71429 32.143-0.71429s16.786 8.2143 15 14.286c-1.7857 6.0714-7.1428 21.429-31.071 21.429-23.929 0-37.143 0.71428-37.143 0.71428s-11.071-3.9286-10.357-17.143z"
+      />
+      <path
+          id="path2900"
+          sodipodi:rx="18.571428"
+          sodipodi:ry="12.678572"
+          style="fill:#333333"
+          sodipodi:type="arc"
+          d="m242.86 470.76c0 7.0022-8.3147 12.679-18.571 12.679-10.257 0-18.571-5.6764-18.571-12.679 0-7.0022 8.3147-12.679 18.571-12.679 10.257 0 18.571 5.6764 18.571 12.679z"
+          transform="translate(-19.286 -3.9286)"
+          sodipodi:cy="470.75504"
+          sodipodi:cx="224.28572"
+      />
+      <path
+          id="path2902"
+          sodipodi:rx="12.142858"
+          sodipodi:ry="11.607142"
+          style="fill:#666666"
+          sodipodi:type="arc"
+          d="m295.36 491.11c0 6.4104-5.4365 11.607-12.143 11.607-6.7063 0-12.143-5.1967-12.143-11.607 0-6.4104 5.4365-11.607 12.143-11.607 6.7063 0 12.143 5.1967 12.143 11.607z"
+          transform="translate(-1.0714 -2.5)"
+          sodipodi:cy="491.11218"
+          sodipodi:cx="283.21429"
+      />
+      <path
+          id="path3692"
+          sodipodi:rx="98.571426"
+          sodipodi:ry="98.571426"
+          style="fill:#545454"
+          sodipodi:type="arc"
+          d="m523.93 595.22c0 54.439-44.132 98.571-98.571 98.571-54.44 0-98.571-44.132-98.571-98.571 0-54.44 44.132-98.571 98.571-98.571s98.571 44.132 98.571 98.571z"
+          transform="matrix(1.2798 0 0 1.2726 -126.16 -194.02)"
+          sodipodi:cy="595.2193"
+          sodipodi:cx="425.35715"
+      />
+      <path
+          id="path3690"
+          sodipodi:rx="98.571426"
+          sodipodi:ry="98.571426"
+          style="fill:#676767"
+          sodipodi:type="arc"
+          d="m523.93 595.22c0 54.439-44.132 98.571-98.571 98.571-54.44 0-98.571-44.132-98.571-98.571 0-54.44 44.132-98.571 98.571-98.571s98.571 44.132 98.571 98.571z"
+          transform="matrix(1.2153 0 0 1.2044 -98.706 -153.44)"
+          sodipodi:cy="595.2193"
+          sodipodi:cx="425.35715"
+      />
+      <path
+          id="path3676"
+          sodipodi:rx="5.3571429"
+          sodipodi:ry="5.3571429"
+          style="fill:#292929"
+          sodipodi:type="arc"
+          d="m349.29 450.22c0 2.9587-2.3985 5.3571-5.3571 5.3571-2.9587 0-5.3571-2.3985-5.3571-5.3571 0-2.9587 2.3985-5.3571 5.3571-5.3571 2.9587 0 5.3571 2.3985 5.3571 5.3571z"
+          sodipodi:cy="450.21933"
+          sodipodi:cx="343.92856"
+      />
+      <path
+          id="path3686"
+          sodipodi:rx="98.571426"
+          sodipodi:ry="98.571426"
+          style="fill:#323232"
+          sodipodi:type="arc"
+          d="m523.93 595.22c0 54.439-44.132 98.571-98.571 98.571-54.44 0-98.571-44.132-98.571-98.571 0-54.44 44.132-98.571 98.571-98.571s98.571 44.132 98.571 98.571z"
+          transform="translate(-7.1429 -31.786)"
+          sodipodi:cy="595.2193"
+          sodipodi:cx="425.35715"
+      />
+      <path
+          id="path3688"
+          sodipodi:rx="69.285713"
+          sodipodi:ry="69.285713"
+          style="fill:#3f3f3f"
+          sodipodi:type="arc"
+          d="m492.86 580.93c0 38.265-31.02 69.286-69.286 69.286-38.265 0-69.286-31.02-69.286-69.286 0-38.265 31.02-69.286 69.286-69.286 38.265 0 69.286 31.02 69.286 69.286z"
+          transform="matrix(1.1777 0 0 1.2034 -80.61 -135.68)"
+          sodipodi:cy="580.93359"
+          sodipodi:cx="423.57144"
+      />
+      <path
+          id="path3684"
+          sodipodi:rx="69.285713"
+          sodipodi:ry="69.285713"
+          style="fill:#888888"
+          sodipodi:type="arc"
+          d="m492.86 580.93c0 38.265-31.02 69.286-69.286 69.286-38.265 0-69.286-31.02-69.286-69.286 0-38.265 31.02-69.286 69.286-69.286 38.265 0 69.286 31.02 69.286 69.286z"
+          transform="translate(-5.3572 -17.5)"
+          sodipodi:cy="580.93359"
+          sodipodi:cx="423.57144"
+      />
+      <path
+          id="path3680"
+          sodipodi:rx="36.07143"
+          sodipodi:ry="36.07143"
+          style="fill:#333333"
+          sodipodi:type="arc"
+          d="m460 573.79c0 19.922-16.15 36.071-36.071 36.071-19.922 0-36.071-16.15-36.071-36.071 0-19.922 16.15-36.071 36.071-36.071 19.922 0 36.071 16.15 36.071 36.071z"
+          transform="translate(-5.7143 -10.357)"
+          sodipodi:cy="573.79077"
+          sodipodi:cx="423.92856"
+      />
+      <path
+          id="path3678"
+          sodipodi:rx="17.321428"
+          sodipodi:ry="17.321428"
+          style="fill:#666666"
+          sodipodi:type="arc"
+          d="m440.71 565.04c0 9.5664-7.7551 17.321-17.321 17.321-9.5664 0-17.321-7.7551-17.321-17.321 0-9.5664 7.7551-17.321 17.321-17.321 9.5664 0 17.321 7.7551 17.321 17.321z"
+          transform="translate(-5.1786 -1.6072)"
+          sodipodi:cy="565.04077"
+          sodipodi:cx="423.39285"
+      />
+      <path
+          id="path3694"
+          sodipodi:rx="5.3571429"
+          sodipodi:ry="5.3571429"
+          style="fill:#292929"
+          sodipodi:type="arc"
+          d="m349.29 450.22c0 2.9587-2.3985 5.3571-5.3571 5.3571-2.9587 0-5.3571-2.3985-5.3571-5.3571 0-2.9587 2.3985-5.3571 5.3571-5.3571 2.9587 0 5.3571 2.3985 5.3571 5.3571z"
+          transform="translate(150.01 1.0102)"
+          sodipodi:cy="450.21933"
+          sodipodi:cx="343.92856"
+      />
+      <path
+          id="path3716"
+          sodipodi:rx="18.571428"
+          sodipodi:ry="12.678572"
+          style="fill:#3f3f3f"
+          sodipodi:type="arc"
+          d="m242.86 470.76c0 7.0022-8.3147 12.679-18.571 12.679-10.257 0-18.571-5.6764-18.571-12.679 0-7.0022 8.3147-12.679 18.571-12.679 10.257 0 18.571 5.6764 18.571 12.679z"
+          transform="matrix(.89121 0 0 .86057 3.0931 59.941)"
+          sodipodi:cy="470.75504"
+          sodipodi:cx="224.28572"
+      />
+      <path
+          id="path3718"
+          sodipodi:rx="14.89975"
+          sodipodi:ry="18.687822"
+          style="fill:url(#linearGradient3756)"
+          sodipodi:type="arc"
+          d="m443.96 550.82c0 10.321-6.6708 18.688-14.9 18.688-8.2289 0-14.9-8.3668-14.9-18.688s6.6708-18.688 14.9-18.688c8.2289 0 14.9 8.3668 14.9 18.688z"
+          transform="matrix(.61017 0 0 .63514 139.23 209.81)"
+          sodipodi:cy="550.82147"
+          sodipodi:cx="429.06229"
+      />
+    </g
+    >
+  </g
+  >
+  <metadata
+    >
+    <rdf:RDF
+      >
+      <cc:Work
+        >
+        <dc:format
+          >image/svg+xml</dc:format
+        >
+        <dc:type
+            rdf:resource="http://purl.org/dc/dcmitype/StillImage"
+        />
+        <cc:license
+            rdf:resource="http://creativecommons.org/licenses/publicdomain/"
+        />
+        <dc:publisher
+          >
+          <cc:Agent
+              rdf:about="http://openclipart.org/"
+            >
+            <dc:title
+              >Openclipart</dc:title
+            >
+          </cc:Agent
+          >
+        </dc:publisher
+        >
+        <dc:title
+          >SLR Camera</dc:title
+        >
+        <dc:date
+          >2010-08-02T20:12:58</dc:date
+        >
+        <dc:description
+          >SLR Camera</dc:description
+        >
+        <dc:source
+          >https://openclipart.org/detail/76255/slr-camera-by-shokunin</dc:source
+        >
+        <dc:creator
+          >
+          <cc:Agent
+            >
+            <dc:title
+              >shokunin</dc:title
+            >
+          </cc:Agent
+          >
+        </dc:creator
+        >
+        <dc:subject
+          >
+          <rdf:Bag
+            >
+            <rdf:li
+              >camera</rdf:li
+            >
+            <rdf:li
+              >photography</rdf:li
+            >
+            <rdf:li
+              >retro.photo</rdf:li
+            >
+            <rdf:li
+              >slr</rdf:li
+            >
+          </rdf:Bag
+          >
+        </dc:subject
+        >
+      </cc:Work
+      >
+      <cc:License
+          rdf:about="http://creativecommons.org/licenses/publicdomain/"
+        >
+        <cc:permits
+            rdf:resource="http://creativecommons.org/ns#Reproduction"
+        />
+        <cc:permits
+            rdf:resource="http://creativecommons.org/ns#Distribution"
+        />
+        <cc:permits
+            rdf:resource="http://creativecommons.org/ns#DerivativeWorks"
+        />
+      </cc:License
+      >
+    </rdf:RDF
+    >
+  </metadata
+  >
+</svg
+>
