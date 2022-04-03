@@ -84,6 +84,7 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
           style: TextStyle(color: Colors.white),
         ),
       ),
+      bottomSheet: messageFieldForm(),
       body: GestureDetector(
         onTap: () {
           FocusScopeNode currentFocus = FocusScope.of(context);
@@ -94,93 +95,49 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
         },
         child: Column(
           children: [
-            Expanded(
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(top: 4),
-                        child: CircleAvatar(
-                          backgroundColor: Colors.green,
-                          maxRadius: 5,
-                        ),
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Column(
-                        children: [
-                          Text(
-                            "Online",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          typingStatus(
-                            userId: user.uid,
-                            widget: widget,
-                          ),
-                          // Text(
-                          //   " typing..",
-                          //   style: TextStyle(
-                          //       color: Colors.white,
-                          //       fontStyle: FontStyle.italic),
-                          // ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  StreamBuilder<QuerySnapshot>(
-                      stream: FirebaseFirestore.instance
-                          .collection("chat_messages")
-                          .doc(user.uid)
-                          .collection(user.uid)
-                          .orderBy("time", descending: false)
-                          .snapshots(),
-                      builder: (context, snapshot) {
-                        Future.delayed(const Duration(milliseconds: 300));
-                        SchedulerBinding.instance?.addPostFrameCallback((_) {
-                          _scrollController.animateTo(
-                              _scrollController.position.maxScrollExtent,
-                              duration: Duration(milliseconds: 500),
-                              curve: Curves.fastOutSlowIn);
-                        });
-                        if (snapshot.hasError) {
-                          Text("Something went wrong");
-                          notNewConversation = false;
-                        }
-                        if (snapshot.hasData) {
-                          notNewConversation = true;
-                          return Flexible(
-                            child: ListView.builder(
-                                physics: const ScrollPhysics(),
-                                itemCount: snapshot.data.docs.length,
-                                shrinkWrap: true,
-                                controller: _scrollController,
-                                // scrollDirection: Axis.vertical,
-                                primary: false,
-                                // keyboardDismissBehavior:
-                                //     ScrollViewKeyboardDismissBehavior.onDrag,
-                                itemBuilder: (context, index) {
-                                  QueryDocumentSnapshot<Object>
-                                      documentSnapshot =
-                                      snapshot.data.docs[index];
-                                  return documentSnapshot["user"] == true
-                                      ? senderMessage(
-                                          documentSnapshot["message"])
-                                      : receiverMessage(
-                                          documentSnapshot["message"]);
-                                }),
-                          );
-                        }
-                        notNewConversation = false;
-                        return CircularProgressIndicator();
-                      }),
-                ],
-              ),
-            ),
-            messageFieldForm(),
+            StreamBuilder<QuerySnapshot>(
+                stream: FirebaseFirestore.instance
+                    .collection("chat_messages")
+                    .doc(user.uid)
+                    .collection(user.uid)
+                    .orderBy("time", descending: false)
+                    .snapshots(),
+                builder: (context, snapshot) {
+                  Future.delayed(const Duration(milliseconds: 300));
+                  SchedulerBinding.instance?.addPostFrameCallback((_) {
+                    _scrollController.animateTo(
+                        _scrollController.position.maxScrollExtent,
+                        duration: Duration(milliseconds: 500),
+                        curve: Curves.fastOutSlowIn);
+                  });
+                  if (snapshot.hasError) {
+                    Text("Something went wrong");
+                    notNewConversation = false;
+                  }
+                  if (snapshot.hasData) {
+                    notNewConversation = true;
+                    return Flexible(
+                      child: ListView.builder(
+                          physics: const ScrollPhysics(),
+                          itemCount: snapshot.data.docs.length,
+                          shrinkWrap: true,
+                          controller: _scrollController,
+                          // scrollDirection: Axis.vertical,
+                          primary: false,
+                          // keyboardDismissBehavior:
+                          //     ScrollViewKeyboardDismissBehavior.onDrag,
+                          itemBuilder: (context, index) {
+                            QueryDocumentSnapshot<Object> documentSnapshot =
+                                snapshot.data.docs[index];
+                            return documentSnapshot["user"] == true
+                                ? senderMessage(documentSnapshot["message"])
+                                : receiverMessage(documentSnapshot["message"]);
+                          }),
+                    );
+                  }
+                  notNewConversation = false;
+                  return CircularProgressIndicator();
+                }),
           ],
         ),
       ),

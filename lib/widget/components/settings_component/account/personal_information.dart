@@ -308,7 +308,7 @@ class _PersonalInformationState extends State<PersonalInformation> {
         if (pickedImage != null) {
           isPreview = true;
           singleImage = File(pickedImage.path);
-          // uploadImage(userId);
+          uploadImage(userId);
         } else {
           Fluttertoast.showToast(msg: "No image is selected");
         }

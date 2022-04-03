@@ -12,7 +12,7 @@ class TextStory extends StatefulWidget {
 }
 
 class _TextStoryState extends State<TextStory> {
-  Color backgroundColor;
+  Color backgroundColor = Color(4280391411);
   String color;
 
   User user = FirebaseAuth.instance.currentUser;

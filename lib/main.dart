@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:wordpower_official_app/pages/login/login_screen.dart';
 import 'package:wordpower_official_app/pages/root_app.dart';
-import 'dart:async';
+// import 'dart:async';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

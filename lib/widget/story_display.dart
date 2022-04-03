@@ -1,8 +1,6 @@
 import 'dart:ui';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:story_view/controller/story_controller.dart';
 import 'package:story_view/widgets/story_view.dart';
@@ -91,7 +89,6 @@ class _StoryDisplayState extends State<StoryDisplay> {
 
               return Center(
                 child: StoryView(
-                  controller: controller,
                   storyItems: [
                     for (i = 1; i <= snapshot.data.docs.length; i++)
                       data[i - 1]['type'] == 'text'
@@ -99,9 +96,13 @@ class _StoryDisplayState extends State<StoryDisplay> {
                               title: data[i - 1]['text'],
                               backgroundColor: Color(data[i - 1]['color']))
                           : data[i - 1]['type'] == 'image'
-                              ? StoryItem.inlineImage(
+                              ? StoryItem.pageImage(
+                                  controller: controller,
+                                  // requestHeaders: Map<String,dynamic>,
+                                  // duration: Duration(seconds: 30),
                                   url: data[i - 1]['url'],
-                                  caption: Text((data[i - 1]['caption'])))
+                                  caption: (data[i - 1]['caption']),
+                                )
                               : StoryItem.pageVideo((data[i - 1]['url']),
                                   controller: controller),
                   ],
@@ -173,6 +174,7 @@ class _StoryDisplayState extends State<StoryDisplay> {
                   progressPosition: ProgressPosition.top,
                   repeat: false,
                   inline: true,
+                  controller: controller,
                 ),
               );
             }),

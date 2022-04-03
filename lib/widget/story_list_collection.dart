@@ -17,14 +17,21 @@ class StoryListCollection extends StatelessWidget {
             .orderBy("time", descending: true)
             .snapshots(),
         builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            return Text(
+              "Something went wrong",
+              style: TextStyle(color: Colors.white),
+            );
+          }
           if (snapshot.data == null) {
             return Text(
               "No stories",
               style: TextStyle(color: Colors.white),
             );
           }
-          if (snapshot.hasData) {
+          if (snapshot.hasData && snapshot.data != null) {
             return Row(
+              mainAxisAlignment: MainAxisAlignment.start,
               children: List.generate(
                 snapshot.data.docs.length,
                 (index) {

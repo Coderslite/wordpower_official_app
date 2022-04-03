@@ -1,10 +1,15 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:wordpower_official_app/pages/home_page.dart';
 import 'package:wordpower_official_app/pages/youtube_page.dart';
 import 'package:wordpower_official_app/theme/colors.dart';
 import 'package:wordpower_official_app/widget/appbar.dart';
 import 'package:wordpower_official_app/widget/settings.dart';
+import 'package:wordpower_official_app/widget/story/image_story.dart';
 
 class RootApp extends StatefulWidget {
   const RootApp({Key key}) : super(key: key);
@@ -15,12 +20,17 @@ class RootApp extends StatefulWidget {
 
 class _RootAppState extends State<RootApp> {
   int pageIndex = 0;
+  File singleImage;
+  final singlePicker = ImagePicker();
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: black,
-      appBar: getAppBar(pageIndex, context),
+      appBar: getAppBar(
+        pageIndex,
+        context,
+      ),
       bottomNavigationBar: getFooter(size),
       body: getBody(),
     );

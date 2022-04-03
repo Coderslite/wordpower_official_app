@@ -21,26 +21,29 @@ class StoryItem extends StatelessWidget {
         right: 20,
         bottom: 10,
       ),
-      child: StreamBuilder<QuerySnapshot>(
-          stream: FirebaseFirestore.instance
+      child: FutureBuilder(
+          future: FirebaseFirestore.instance
               .collection("story_collection")
               .doc(userId)
               .collection(userId)
               .orderBy("time", descending: false)
-              .snapshots(),
+              .get(),
           builder: (context, snapshot) {
             List<QueryDocumentSnapshot<Object>> data = snapshot.data.docs;
-            int storyLength = data.length;
+            int storyLength = snapshot.data.docs.length;
             if (snapshot.hasError) {
-              return Text(
+              return const Text(
                 "Something went wrong",
                 style: TextStyle(color: Colors.white),
               );
             }
-            if (snapshot.data == null || snapshot.data.docs.length == 0) {
-              return Text('');
+            if (snapshot.data.docs.isEmpty) {
+              return const Text(
+                "No stories",
+                style: TextStyle(color: Colors.white),
+              );
             }
-            if (snapshot.hasData || snapshot != null) {
+            if (snapshot.hasData && snapshot != null) {
               return GestureDetector(
                 onTap: () {
                   Navigator.push(context, MaterialPageRoute(builder: (_) {
@@ -62,7 +65,7 @@ class StoryItem extends StatelessWidget {
                       ),
                       child: Padding(
                         padding: const EdgeInsets.all(3.0),
-                        child: data[0]['type'] == 'text'
+                        child: data[storyLength - 1]['type'] == 'text'
                             ? Stack(children: [
                                 Container(
                                   width: 65,
@@ -102,17 +105,45 @@ class StoryItem extends StatelessWidget {
                                   ),
                                 ),
                               ])
-                            : Container(
-                                width: 65,
-                                height: 65,
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                    color: black,
+                            : Stack(
+                                children: [
+                                  Container(
+                                    width: 65,
+                                    height: 65,
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color: black,
+                                      ),
+                                      shape: BoxShape.circle,
+                                      image: DecorationImage(
+                                          image: NetworkImage(
+                                              data[storyLength - 1]['url']),
+                                          fit: BoxFit.cover),
+                                    ),
                                   ),
-                                  shape: BoxShape.circle,
-                                  image: DecorationImage(
-                                      image: AssetImage(''), fit: BoxFit.cover),
-                                ),
+                                  Positioned(
+                                    bottom: 0,
+                                    right: 0,
+                                    child: Container(
+                                      width: 19,
+                                      height: 19,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: Color(
+                                          4280391411,
+                                        ),
+                                      ),
+                                      child: Center(
+                                        child: Text(
+                                          storyLength.toString(),
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                       ),
                     ),

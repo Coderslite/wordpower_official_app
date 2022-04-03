@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fab_circular_menu/fab_circular_menu.dart';
@@ -5,10 +7,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:progress_indicators/progress_indicators.dart';
 import 'package:wordpower_official_app/constant/story_json.dart';
 import 'package:wordpower_official_app/theme/colors.dart';
 import 'package:wordpower_official_app/widget/post_screen.dart';
+import 'package:wordpower_official_app/widget/story/image_story.dart';
 import 'package:wordpower_official_app/widget/story/text_story.dart';
 import 'package:wordpower_official_app/widget/story_list_collection.dart';
 
@@ -20,6 +25,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  File singleImage;
+  final singlePicker = ImagePicker();
+  String url = "";
   User user = FirebaseAuth.instance.currentUser;
   String myProfileImage = "";
   List postList = [];
@@ -98,6 +106,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                         onPressed: () {
                           // print('Favorite');
+                          handleImage();
                         },
                       ),
                     ])
@@ -107,9 +116,6 @@ class _HomePageState extends State<HomePage> {
   }
 
   getBody() {
-    setState(() {
-      myProfileImage = user.photoURL.toString();
-    });
     return StreamBuilder(
       stream: FirebaseFirestore.instance
           .collection("users")
@@ -135,11 +141,14 @@ class _HomePageState extends State<HomePage> {
           return SingleChildScrollView(
             scrollDirection: Axis.vertical,
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(
@@ -232,20 +241,21 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  // Future<firebase_storage.ListResult> listFiles() async {
-  //   firebase_storage.ListResult results = await storage.ref('test').listAll();
-  //   results.items.forEach((firebase_storage.Reference ref) {
-  //     print('found files: $ref');
-  //   });
-  //   return results;
-
-  //   // Within your widgets:
-  //   // Image.network(downloadURL);
-  // }
-
-  // Future getImage() async {
-  //   firebase_storage.FirebaseStorage.instance
-  //       .ref('test/NQ0oTCvhxXJ1gdhioT6Q/NQ0oTCvhxXJ1gdhioT6Q')
-  //       .getDownloadURL();
-  // }
+  void handleImage() async {
+    final pickedImage =
+        await singlePicker.pickImage(source: (ImageSource.camera));
+    setState(
+      () {
+        if (pickedImage != null) {
+          singleImage = File(pickedImage.path);
+          Navigator.push(context, MaterialPageRoute(builder: (_) {
+            return ImageStory(image: singleImage);
+          }));
+          // uploadImage(userId);
+        } else {
+          Fluttertoast.showToast(msg: "No image is selected");
+        }
+      },
+    );
+  }
 }
