@@ -57,6 +57,7 @@ class _SavedPostListState extends State<SavedPostList> {
                                 "Something went wrong",
                                 style: TextStyle(
                                   color: Colors.white,
+                                  fontFamily: "RedHatDisplay",
                                 ),
                               );
                             } else if (snapshot2.data.docs.isEmpty) {
@@ -64,6 +65,7 @@ class _SavedPostListState extends State<SavedPostList> {
                                 "No saved post",
                                 style: TextStyle(
                                   color: Colors.white,
+                                  fontFamily: "RedHatDisplay",
                                 ),
                               );
                             } else if (snapshot2.hasData ||
@@ -95,7 +97,9 @@ class _SavedPostListState extends State<SavedPostList> {
                                             Text(
                                               data[index]['date'],
                                               style: TextStyle(
-                                                  color: Colors.white),
+                                                color: Colors.white,
+                                                fontFamily: "RedHatDisplay",
+                                              ),
                                             ),
                                             IconButton(
                                               onPressed: () {
@@ -120,7 +124,9 @@ class _SavedPostListState extends State<SavedPostList> {
                                             child: Text(
                                               data[index]["description"],
                                               style: TextStyle(
-                                                  color: Colors.white),
+                                                color: Colors.white,
+                                                fontFamily: "RedHatDisplay",
+                                              ),
                                             ),
                                           )
                                         ],
@@ -140,7 +146,10 @@ class _SavedPostListState extends State<SavedPostList> {
                       : Center(
                           child: const Text(
                             "No Saved Post",
-                            style: TextStyle(color: Colors.white),
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontFamily: "RedHatDisplay",
+                            ),
                           ),
                         );
                 },

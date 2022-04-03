@@ -16,7 +16,12 @@ class _SecurityScreenState extends State<SecurityScreen> {
       backgroundColor: Colors.black,
       appBar: AppBar(
         backgroundColor: Colors.black,
-        title: const Text("Security"),
+        title: const Text(
+          "Security",
+          style: TextStyle(
+            fontFamily: "RedHatDisplay",
+          ),
+        ),
         automaticallyImplyLeading: true,
       ),
       body: Padding(
@@ -28,7 +33,11 @@ class _SecurityScreenState extends State<SecurityScreen> {
             children: [
               const Text(
                 "Login Security",
-                style: TextStyle(color: Colors.white, fontSize: 13),
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 13,
+                  fontFamily: "RedHatDisplay",
+                ),
               ),
               SizedBox(
                 height: 30,
@@ -38,7 +47,10 @@ class _SecurityScreenState extends State<SecurityScreen> {
                 child: ListTile(
                   title: Text(
                     "Password",
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontFamily: "RedHatDisplay",
+                    ),
                   ),
                   leading: Icon(
                     Icons.vpn_key_outlined,
@@ -51,7 +63,10 @@ class _SecurityScreenState extends State<SecurityScreen> {
                 child: ListTile(
                   title: Text(
                     "Login Activity",
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontFamily: "RedHatDisplay",
+                    ),
                   ),
                   leading: Icon(
                     Icons.gps_fixed,
@@ -64,7 +79,10 @@ class _SecurityScreenState extends State<SecurityScreen> {
                 child: ListTile(
                   title: Text(
                     "Email",
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontFamily: "RedHatDisplay",
+                    ),
                   ),
                   leading: Icon(
                     Icons.email_outlined,

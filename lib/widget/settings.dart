@@ -61,7 +61,10 @@ class Setting extends StatelessWidget {
                         child: const ListTile(
                           title: Text(
                             "Notificaton",
-                            style: TextStyle(color: Colors.white),
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontFamily: "RedHatDisplay",
+                            ),
                           ),
                           leading: Icon(
                             Icons.notifications_none_outlined,
@@ -74,7 +77,10 @@ class Setting extends StatelessWidget {
                         child: const ListTile(
                           title: Text(
                             "Privacy",
-                            style: TextStyle(color: Colors.white),
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontFamily: "RedHatDisplay",
+                            ),
                           ),
                           leading: Icon(Icons.verified_outlined,
                               color: Colors.white),
@@ -90,7 +96,10 @@ class Setting extends StatelessWidget {
                         child: const ListTile(
                           title: Text(
                             "Security",
-                            style: TextStyle(color: Colors.white),
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontFamily: "RedHatDisplay",
+                            ),
                           ),
                           leading: Icon(Icons.security_outlined,
                               color: Colors.white),
@@ -106,7 +115,10 @@ class Setting extends StatelessWidget {
                         child: const ListTile(
                           title: Text(
                             "Account",
-                            style: TextStyle(color: Colors.white),
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontFamily: "RedHatDisplay",
+                            ),
                           ),
                           leading: Icon(Icons.person_outline_rounded,
                               color: Colors.white),
@@ -117,7 +129,10 @@ class Setting extends StatelessWidget {
                         child: const ListTile(
                           title: Text(
                             "Help",
-                            style: TextStyle(color: Colors.white),
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontFamily: "RedHatDisplay",
+                            ),
                           ),
                           leading: Icon(Icons.help_outline_rounded,
                               color: Colors.white),
@@ -128,7 +143,10 @@ class Setting extends StatelessWidget {
                         child: const ListTile(
                           title: Text(
                             "About",
-                            style: TextStyle(color: Colors.white),
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontFamily: "RedHatDisplay",
+                            ),
                           ),
                           leading: Icon(Icons.info_outline_rounded,
                               color: Colors.white),

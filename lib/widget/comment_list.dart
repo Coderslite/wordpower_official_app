@@ -26,9 +26,12 @@ class commentList extends StatelessWidget {
             builder: (context, AsyncSnapshot<QuerySnapshot<Map>> snapshot) {
               List<QueryDocumentSnapshot<Map>> data = snapshot.data.docs;
               if (snapshot.hasError) {
-                return Text(
+                return const Text(
                   "Something went wrong",
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontFamily: "RedHatDisplay",
+                  ),
                 );
               }
               if (snapshot.hasData) {
@@ -39,6 +42,7 @@ class commentList extends StatelessWidget {
                       color: Colors.white.withOpacity(0.3),
                       fontSize: 15,
                       fontWeight: FontWeight.w500,
+                      fontFamily: "RedHatDisplay",
                     ),
                   );
                 }
@@ -49,6 +53,7 @@ class commentList extends StatelessWidget {
                       color: Colors.white.withOpacity(0.3),
                       fontSize: 15,
                       fontWeight: FontWeight.w500,
+                      fontFamily: "RedHatDisplay",
                     ),
                   );
                 }
@@ -59,6 +64,7 @@ class commentList extends StatelessWidget {
                       color: Colors.white.withOpacity(0.3),
                       fontSize: 15,
                       fontWeight: FontWeight.w500,
+                      fontFamily: "RedHatDisplay",
                     ),
                   );
                 }

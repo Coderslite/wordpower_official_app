@@ -41,14 +41,14 @@ class _PostItemState extends State<PostItem> {
   handleAddComment(String comment, String postId, String profileImage) {
     DocumentReference commentReference =
         FirebaseFirestore.instance.collection("comments").doc();
-      DateTime now = DateTime.now();
+    DateTime now = DateTime.now();
     DateFormat formatter = DateFormat('yyyy-MM-dd');
     String formatted = formatter.format(now);
     Map<String, dynamic> commentDetails = {
       "postId": postId,
       "comment": comment,
       "commenter": user.uid,
-     "commentId": commentReference.id,
+      "commentId": commentReference.id,
       "profileImage": profileImage,
       "date": formatted,
       "time": now.microsecondsSinceEpoch.toString(),
@@ -125,6 +125,7 @@ class _PostItemState extends State<PostItem> {
                                   color: white,
                                   fontSize: 15,
                                   fontWeight: FontWeight.w500,
+                                  fontFamily: "RedHatDisplay",
                                 ),
                               ),
                             ],
@@ -295,10 +296,20 @@ class _PostItemState extends State<PostItem> {
                         right: 15,
                       ),
                       child: postLiked.length < 2
-                          ? Text(postLiked.length.toString() + " like",
-                              style: TextStyle(color: Colors.white))
-                          : Text(postLiked.length.toString() + " likes",
-                              style: TextStyle(color: Colors.white)),
+                          ? Text(
+                              postLiked.length.toString() + " like",
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontFamily: "RedHatDisplay",
+                              ),
+                            )
+                          : Text(
+                              postLiked.length.toString() + " likes",
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontFamily: "RedHatDisplay",
+                              ),
+                            ),
                     ),
                     const SizedBox(
                       height: 12,
@@ -334,7 +345,10 @@ class _PostItemState extends State<PostItem> {
                                 // trimMode: TrimMode.Line,
                                 // trimCollapsedText: '.... show more',
                                 // trimExpandedText: '.... show less',
-                                style: const TextStyle(color: Colors.white),
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontFamily: "RedHatDisplay",
+                                ),
                               ),
                             ],
                           ),
@@ -382,7 +396,10 @@ class _PostItemState extends State<PostItem> {
                                   style: const TextStyle(color: Colors.white),
                                   decoration: InputDecoration(
                                     hintText: "Add your comments",
-                                    hintStyle: TextStyle(color: Colors.white54),
+                                    hintStyle: TextStyle(
+                                      color: Colors.white54,
+                                      fontFamily: "RedHatDisplay",
+                                    ),
                                     border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(5),
                                       borderSide: BorderSide.none,
@@ -428,6 +445,7 @@ class _PostItemState extends State<PostItem> {
                           color: Colors.white.withOpacity(0.5),
                           fontSize: 10,
                           fontWeight: FontWeight.w500,
+                          fontFamily: "RedHatDisplay",
                         ),
                       ),
                     ),

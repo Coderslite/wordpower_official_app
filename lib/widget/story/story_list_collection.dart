@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:progress_indicators/progress_indicators.dart';
-import 'package:wordpower_official_app/widget/story_item.dart';
+import 'package:wordpower_official_app/widget/story/story_item.dart';
 
 class StoryListCollection extends StatelessWidget {
   const StoryListCollection({
@@ -20,13 +20,18 @@ class StoryListCollection extends StatelessWidget {
           if (snapshot.hasError) {
             return Text(
               "Something went wrong",
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(color: Colors.white,
+                                fontFamily: "RedHatDisplay",
+              ),
             );
           }
           if (snapshot.data == null) {
             return Text(
               "No stories",
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(color: Colors.white,
+                                fontFamily: "RedHatDisplay",
+              ),
+              
             );
           }
           if (snapshot.hasData && snapshot.data != null) {

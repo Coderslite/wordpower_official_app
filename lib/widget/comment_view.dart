@@ -10,8 +10,7 @@ import 'package:intl/intl.dart';
 class CommentViewScreen extends StatefulWidget {
   final String postId;
   final String profileImage;
-  const CommentViewScreen(
-      {Key key,  this.postId,  this.profileImage})
+  const CommentViewScreen({Key key, this.postId, this.profileImage})
       : super(key: key);
 
   @override
@@ -81,15 +80,14 @@ class _CommentViewScreenState extends State<CommentViewScreen> {
               child: StreamBuilder<QuerySnapshot>(
                   stream: FirebaseFirestore.instance
                       .collection('comments')
-                      .where("postId", isEqualTo: widget.postId)
+                      .where("postId", isEqualTo: widget.postId ?? null)
                       .snapshots(),
                   builder: (BuildContext context, snapshot) {
                     if (snapshot.hasError) {
                       return const Text("Something went wrong",
                           style: TextStyle(color: Colors.white));
                     }
-                    if (snapshot.data.docs == null ||
-                        snapshot.data.docs.isEmpty) {
+                    if (!snapshot.hasData) {
                       return const Text(
                         "No Comment yet",
                         style: TextStyle(color: Colors.white),

@@ -74,8 +74,8 @@ class _StoryDisplayState extends State<StoryDisplay> {
         body: StreamBuilder<QuerySnapshot>(
             stream: FirebaseFirestore.instance
                 .collection("story_collection")
-                .doc(widget.userId)
-                .collection(widget.userId)
+                .doc(widget.userId ?? null)
+                .collection(widget.userId ?? null)
                 .orderBy("time", descending: true)
                 .snapshots(),
             builder: (context, snapshot) {
@@ -85,98 +85,107 @@ class _StoryDisplayState extends State<StoryDisplay> {
                   style: TextStyle(color: Colors.white),
                 );
               }
-              List<QueryDocumentSnapshot<Object>> data = snapshot.data.docs;
+              if (!snapshot.hasData) {
+                return const Text(
+                  "No data found",
+                  style: TextStyle(color: Colors.white),
+                );
+              }
+              if (snapshot.hasData) {
+                List<QueryDocumentSnapshot<Object>> data = snapshot.data.docs;
 
-              return Center(
-                child: StoryView(
-                  storyItems: [
-                    for (i = 1; i <= snapshot.data.docs.length; i++)
-                      data[i - 1]['type'] == 'text'
-                          ? StoryItem.text(
-                              title: data[i - 1]['text'],
-                              backgroundColor: Color(data[i - 1]['color']))
-                          : data[i - 1]['type'] == 'image'
-                              ? StoryItem.pageImage(
-                                  controller: controller,
-                                  // requestHeaders: Map<String,dynamic>,
-                                  // duration: Duration(seconds: 30),
-                                  url: data[i - 1]['url'],
-                                  caption: (data[i - 1]['caption']),
-                                )
-                              : StoryItem.pageVideo((data[i - 1]['url']),
-                                  controller: controller),
-                  ],
-                  // storyItems: [
-                  //   if (data['type'] == 'text')
-                  //     StoryItem.text(
-                  //         title: data['text'], backgroundColor: Colors.blue)
-                  // ],
-                  // [
-                  //   StoryItem.text(
-                  //     title:
-                  //         "Hello world!\nHave a look at some great Ghanaian delicacies. I'm sorry if your mouth waters. \n\nTap!",
-                  //     backgroundColor: Colors.blue,
-                  //     roundedTop: true,
-                  //   ),
-                  //   // StoryItem.inlineImage(
-                  //   //   NetworkImage(
-                  //   //       "https://image.ibb.co/gCZFbx/Banku-and-tilapia.jpg"),
-                  //   //   caption: Text(
-                  //   //     "Banku & Tilapia. The food to keep you charged whole day.\n#1 Local food.",
-                  //   //     style: TextStyle(
-                  //   //       color: Colors.white,
-                  //   //       backgroundColor: Colors.black54,
-                  //   //       fontSize: 17,
-                  //   //     ),
-                  //   //   ),
-                  //   // ),
-                  //   StoryItem.inlineImage(
-                  //     url:
-                  //         "https://image.ibb.co/cU4WGx/Omotuo-Groundnut-Soup-braperucci-com-1.jpg",
-                  //     controller: controller,
-                  //     caption: Text(
-                  //       "Omotuo & Nkatekwan; You will love this meal if taken as supper.",
-                  //       style: TextStyle(
-                  //         color: Colors.white,
-                  //         backgroundColor: Colors.black54,
-                  //         fontSize: 17,
-                  //       ),
-                  //     ),
-                  //   ),
-                  //   StoryItem.inlineImage(
-                  //     url:
-                  //         "https://media.giphy.com/media/5GoVLqeAOo6PK/giphy.gif",
-                  //     controller: controller,
-                  //     caption: Text(
-                  //       "Hektas, sektas and skatad",
-                  //       style: TextStyle(
-                  //         color: Colors.white,
-                  //         backgroundColor: Colors.black54,
-                  //         fontSize: 17,
-                  //       ),
-                  //     ),
-                  //   )
-                  // ],
-                  onVerticalSwipeComplete: (e) {
-                    return Text("HI");
-                  },
-                  onStoryShow: (s) {
-                    // addToStoryView();
-                    // for (int x = 1; x < data.length; x++) {
-                    //   storyViewers = data[x - 1]['story_viewers'];
-                    // }
-                    // print(data[i - 1]['story_viewers']);
-                  },
-                  onComplete: () {
-                    print("Completed a cycle");
-                    Navigator.pop(context);
-                  },
-                  progressPosition: ProgressPosition.top,
-                  repeat: false,
-                  inline: true,
-                  controller: controller,
-                ),
-              );
+                return Center(
+                  child: StoryView(
+                    storyItems: [
+                      for (i = 1; i <= snapshot.data.docs.length; i++)
+                        data[i - 1]['type'] == 'text'
+                            ? StoryItem.text(
+                                title: data[i - 1]['text'],
+                                backgroundColor: Color(data[i - 1]['color']))
+                            : data[i - 1]['type'] == 'image'
+                                ? StoryItem.pageImage(
+                                    controller: controller,
+                                    // requestHeaders: Map<String,dynamic>,
+                                    // duration: Duration(seconds: 30),
+                                    url: data[i - 1]['url'],
+                                    caption: (data[i - 1]['caption']),
+                                  )
+                                : StoryItem.pageVideo((data[i - 1]['url']),
+                                    controller: controller),
+                    ],
+                    // storyItems: [
+                    //   if (data['type'] == 'text')
+                    //     StoryItem.text(
+                    //         title: data['text'], backgroundColor: Colors.blue)
+                    // ],
+                    // [
+                    //   StoryItem.text(
+                    //     title:
+                    //         "Hello world!\nHave a look at some great Ghanaian delicacies. I'm sorry if your mouth waters. \n\nTap!",
+                    //     backgroundColor: Colors.blue,
+                    //     roundedTop: true,
+                    //   ),
+                    //   // StoryItem.inlineImage(
+                    //   //   NetworkImage(
+                    //   //       "https://image.ibb.co/gCZFbx/Banku-and-tilapia.jpg"),
+                    //   //   caption: Text(
+                    //   //     "Banku & Tilapia. The food to keep you charged whole day.\n#1 Local food.",
+                    //   //     style: TextStyle(
+                    //   //       color: Colors.white,
+                    //   //       backgroundColor: Colors.black54,
+                    //   //       fontSize: 17,
+                    //   //     ),
+                    //   //   ),
+                    //   // ),
+                    //   StoryItem.inlineImage(
+                    //     url:
+                    //         "https://image.ibb.co/cU4WGx/Omotuo-Groundnut-Soup-braperucci-com-1.jpg",
+                    //     controller: controller,
+                    //     caption: Text(
+                    //       "Omotuo & Nkatekwan; You will love this meal if taken as supper.",
+                    //       style: TextStyle(
+                    //         color: Colors.white,
+                    //         backgroundColor: Colors.black54,
+                    //         fontSize: 17,
+                    //       ),
+                    //     ),
+                    //   ),
+                    //   StoryItem.inlineImage(
+                    //     url:
+                    //         "https://media.giphy.com/media/5GoVLqeAOo6PK/giphy.gif",
+                    //     controller: controller,
+                    //     caption: Text(
+                    //       "Hektas, sektas and skatad",
+                    //       style: TextStyle(
+                    //         color: Colors.white,
+                    //         backgroundColor: Colors.black54,
+                    //         fontSize: 17,
+                    //       ),
+                    //     ),
+                    //   )
+                    // ],
+                    onVerticalSwipeComplete: (e) {
+                      return Text("HI");
+                    },
+                    onStoryShow: (s) {
+                      // addToStoryView();
+                      // for (int x = 1; x < data.length; x++) {
+                      //   storyViewers = data[x - 1]['story_viewers'];
+                      // }
+                      // print(data[i - 1]['story_viewers']);
+                    },
+                    onComplete: () {
+                      print("Completed a cycle");
+                      Navigator.pop(context);
+                    },
+                    progressPosition: ProgressPosition.top,
+                    repeat: false,
+                    inline: true,
+                    controller: controller,
+                  ),
+                );
+              }
+              return const CircularProgressIndicator();
             }),
       ),
     );

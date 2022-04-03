@@ -27,7 +27,10 @@ class _YoutubeViewState extends State<YoutubeView> {
                       if (snapshot.hasError) {
                         return const Text(
                           "Something went wrong",
-                          style: TextStyle(color: Colors.white),
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontFamily: "RedHatDisplay",
+                          ),
                         );
                       } else if (snapshot.hasData || snapshot.data != null) {
                         return ListView.builder(
@@ -48,11 +51,17 @@ class _YoutubeViewState extends State<YoutubeView> {
                                 child: ListTile(
                                   title: Text(
                                     documentSnapshot["name"],
-                                    style: TextStyle(color: Colors.white),
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: "RedHatDisplay",
+                                    ),
                                   ),
                                   subtitle: Text(
                                     documentSnapshot["description"],
-                                    style: TextStyle(color: Colors.white),
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: "RedHatDisplay",
+                                    ),
                                   ),
                                   autofocus: false,
                                   trailing: Icon(
@@ -61,7 +70,10 @@ class _YoutubeViewState extends State<YoutubeView> {
                                   ),
                                   leading: Text(
                                     (index + 1).toString(),
-                                    style: TextStyle(color: Colors.white),
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: "RedHatDisplay",
+                                    ),
                                   ),
                                   isThreeLine: true,
                                 ),

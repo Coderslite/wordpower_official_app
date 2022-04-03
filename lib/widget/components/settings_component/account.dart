@@ -37,7 +37,10 @@ class _AccountScreenState extends State<AccountScreen> {
               child: const ListTile(
                 title: Text(
                   "Personal Information",
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontFamily: "RedHatDisplay",
+                  ),
                 ),
               ),
             ),
@@ -46,20 +49,26 @@ class _AccountScreenState extends State<AccountScreen> {
               child: const ListTile(
                 title: Text(
                   "Your Activity",
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontFamily: "RedHatDisplay",
+                  ),
                 ),
               ),
             ),
             GestureDetector(
               onTap: () {
                 Navigator.push(context, MaterialPageRoute(builder: (_) {
-                  return SavedPostList();
+                  return const SavedPostList();
                 }));
               },
               child: const ListTile(
                 title: Text(
                   "Saved",
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontFamily: "RedHatDisplay",
+                  ),
                 ),
               ),
             ),
@@ -68,7 +77,10 @@ class _AccountScreenState extends State<AccountScreen> {
               child: const ListTile(
                 title: Text(
                   "Post you have liked",
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontFamily: "RedHatDisplay",
+                  ),
                 ),
               ),
             ),
@@ -77,7 +89,10 @@ class _AccountScreenState extends State<AccountScreen> {
               child: const ListTile(
                 title: Text(
                   "Brand Content",
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontFamily: "RedHatDisplay",
+                  ),
                 ),
               ),
             ),
@@ -88,7 +103,10 @@ class _AccountScreenState extends State<AccountScreen> {
               child: const ListTile(
                 title: Text(
                   "Logout",
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontFamily: "RedHatDisplay",
+                  ),
                 ),
               ),
             ),
@@ -101,8 +119,18 @@ class _AccountScreenState extends State<AccountScreen> {
   showDialog(context) async {
     return await NAlertDialog(
       dialogStyle: DialogStyle(titleDivider: true),
-      title: const Text("Logout ?"),
-      content: const Text("Hi, please confirm your login out"),
+      title: const Text(
+        "Logout ?",
+        style: TextStyle(
+          fontFamily: "RedHatDisplay",
+        ),
+      ),
+      content: const Text(
+        "Hi, please confirm your login out",
+        style: TextStyle(
+          fontFamily: "RedHatDisplay",
+        ),
+      ),
       actions: <Widget>[
         Padding(
           padding: const EdgeInsets.all(8.0),
@@ -112,7 +140,10 @@ class _AccountScreenState extends State<AccountScreen> {
             },
             child: const Text(
               "Cancel",
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(
+                color: Colors.white,
+                fontFamily: "RedHatDisplay",
+              ),
             ),
             style: ElevatedButton.styleFrom(
               primary: Colors.red,
@@ -127,7 +158,10 @@ class _AccountScreenState extends State<AccountScreen> {
             },
             child: const Text(
               "yes",
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(
+                color: Colors.white,
+                fontFamily: "RedHatDisplay",
+              ),
             ),
             style: ElevatedButton.styleFrom(
               primary: Colors.blue,

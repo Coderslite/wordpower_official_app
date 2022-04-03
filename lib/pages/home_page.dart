@@ -14,8 +14,8 @@ import 'package:wordpower_official_app/constant/story_json.dart';
 import 'package:wordpower_official_app/theme/colors.dart';
 import 'package:wordpower_official_app/widget/post_screen.dart';
 import 'package:wordpower_official_app/widget/story/image_story.dart';
+import 'package:wordpower_official_app/widget/story/story_list_collection.dart';
 import 'package:wordpower_official_app/widget/story/text_story.dart';
-import 'package:wordpower_official_app/widget/story_list_collection.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key key}) : super(key: key);
@@ -211,6 +211,7 @@ class _HomePageState extends State<HomePage> {
                                 overflow: TextOverflow.ellipsis,
                                 style: const TextStyle(
                                   color: white,
+                                  fontFamily: "RedHatDisplay",
                                 ),
                               ),
                             ),

@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:wordpower_official_app/pages/chat_apostle/chat_home_screen.dart';
 import 'package:wordpower_official_app/theme/colors.dart';
@@ -32,35 +31,38 @@ getAppBar(int pageIndex, context) {
                 Fluttertoast.showToast(msg: "No Image is selected");
               }
             },
-            child: Icon(
+            child: const Icon(
               CupertinoIcons.camera,
               size: 25,
             ),
           ),
           // SvgPicture.asset("images/slr.svg"),
-          Text(
+          const Text(
             "Wordpower Ministry",
-            style: GoogleFonts.josefinSans(
-                textStyle: TextStyle(
-              fontSize: 20,
-              color: Colors.white,
-              letterSpacing: .5,
-              fontStyle: FontStyle.italic,
-            )),
+            style: TextStyle(
+              fontFamily: "RedHatDisplay",
+            ),
+            //  GoogleFonts.josefinSans(
+            //   textStyle: TextStyle(
+            //     fontSize: 20,
+            //     color: Colors.white,
+            //     letterSpacing: .5,
+            //     fontStyle: FontStyle.italic,
+            //   ),
           ),
           // Icon(
           //   Icons.message_outlined,
           //   size: 30,
           // ),
           GestureDetector(
-            child: Icon(
+            child: const Icon(
               CupertinoIcons.chat_bubble_2_fill,
               color: Colors.white,
               size: 25,
             ),
             onTap: () {
               Navigator.push(context, MaterialPageRoute(builder: (_) {
-                return ChatHomeScreen();
+                return const ChatHomeScreen();
               }));
             },
           ),
@@ -74,15 +76,24 @@ getAppBar(int pageIndex, context) {
   else if (pageIndex == 1) {
     return AppBar(
       backgroundColor: Colors.red,
-      title: Text("YouTube Channel"),
+      title: const Text(
+        "YouTube Channel",
+        style: TextStyle(
+          fontFamily: "RedHatDisplay",
+        ),
+      ),
       automaticallyImplyLeading: false,
     );
   } else {
     return AppBar(
       backgroundColor: appBarColor,
-      title: Text("Settings"),
+      title: const Text(
+        "Settings",
+        style: TextStyle(
+          fontFamily: "RedHatDisplay",
+        ),
+      ),
       automaticallyImplyLeading: false,
     );
   }
-  ;
 }

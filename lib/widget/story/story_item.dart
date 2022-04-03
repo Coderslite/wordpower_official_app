@@ -3,7 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:progress_indicators/progress_indicators.dart';
 import 'package:wordpower_official_app/theme/colors.dart';
-import 'package:wordpower_official_app/widget/story_display.dart';
+import 'package:wordpower_official_app/widget/story/story_display.dart';
 
 class StoryItem extends StatelessWidget {
   final String userId;
@@ -24,8 +24,8 @@ class StoryItem extends StatelessWidget {
       child: FutureBuilder(
           future: FirebaseFirestore.instance
               .collection("story_collection")
-              .doc(userId)
-              .collection(userId)
+              .doc(userId ?? null)
+              .collection(userId ?? null)
               .orderBy("time", descending: false)
               .get(),
           builder: (context, snapshot) {
@@ -34,16 +34,22 @@ class StoryItem extends StatelessWidget {
             if (snapshot.hasError) {
               return const Text(
                 "Something went wrong",
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(
+                  color: Colors.white,
+                  fontFamily: "RedHatDisplay",
+                ),
               );
             }
-            if (snapshot.data.docs.isEmpty) {
+            if (!snapshot.hasData) {
               return const Text(
                 "No stories",
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(
+                  color: Colors.white,
+                  fontFamily: "RedHatDisplay",
+                ),
               );
             }
-            if (snapshot.hasData && snapshot != null) {
+            if (snapshot.hasData) {
               return GestureDetector(
                 onTap: () {
                   Navigator.push(context, MaterialPageRoute(builder: (_) {
@@ -78,7 +84,10 @@ class StoryItem extends StatelessWidget {
                                   child: Center(
                                       child: Text(
                                     data[storyLength - 1]['text'],
-                                    style: TextStyle(color: Colors.white),
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: "RedHatDisplay",
+                                    ),
                                     maxLines: 1,
                                     overflow: TextOverflow.ellipsis,
                                   )),
@@ -97,9 +106,11 @@ class StoryItem extends StatelessWidget {
                                     child: Center(
                                       child: Text(
                                         storyLength.toString(),
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold),
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: "RedHatDisplay",
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -127,18 +138,20 @@ class StoryItem extends StatelessWidget {
                                     child: Container(
                                       width: 19,
                                       height: 19,
-                                      decoration: BoxDecoration(
+                                      decoration: const BoxDecoration(
                                         shape: BoxShape.circle,
                                         color: Color(
-                                          4280391411,
+                                          0xff2196f3,
                                         ),
                                       ),
                                       child: Center(
                                         child: Text(
                                           storyLength.toString(),
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.bold),
+                                          style: const TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: "RedHatDisplay",
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -162,6 +175,7 @@ class StoryItem extends StatelessWidget {
                               "Something went wrong",
                               style: TextStyle(
                                 color: Colors.white,
+                                fontFamily: "RedHatDisplay",
                               ),
                             );
                           } else if (snapshot.hasData ||
@@ -172,7 +186,10 @@ class StoryItem extends StatelessWidget {
                               child: Text(
                                 data['name'] ?? "",
                                 overflow: TextOverflow.ellipsis,
-                                style: TextStyle(color: white),
+                                style: TextStyle(
+                                  color: white,
+                                  fontFamily: "RedHatDisplay",
+                                ),
                               ),
                             );
                           }

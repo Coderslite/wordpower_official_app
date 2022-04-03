@@ -16,7 +16,12 @@ class _NotificationScreenState extends State<NotificationScreen> {
       backgroundColor: Colors.black,
       appBar: AppBar(
         backgroundColor: Colors.black,
-        title: const Text("Notifications"),
+        title: const Text(
+          "Notifications",
+          style: TextStyle(
+            fontFamily: "RedHatDisplay",
+          ),
+        ),
         automaticallyImplyLeading: true,
       ),
       body: Padding(
@@ -31,7 +36,10 @@ class _NotificationScreenState extends State<NotificationScreen> {
                 child: const ListTile(
                   title: Text(
                     "Push Notification",
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontFamily: "RedHatDisplay",
+                    ),
                   ),
                 ),
               ),
@@ -40,7 +48,10 @@ class _NotificationScreenState extends State<NotificationScreen> {
                 child: const ListTile(
                   title: Text(
                     "Live Video and Call",
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontFamily: "RedHatDisplay",
+                    ),
                   ),
                 ),
               ),
@@ -49,7 +60,10 @@ class _NotificationScreenState extends State<NotificationScreen> {
                 child: const ListTile(
                   title: Text(
                     "Pause All",
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontFamily: "RedHatDisplay",
+                    ),
                   ),
                 ),
               ),
@@ -58,7 +72,10 @@ class _NotificationScreenState extends State<NotificationScreen> {
                 child: const ListTile(
                   title: Text(
                     "Email and Sms",
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontFamily: "RedHatDisplay",
+                    ),
                   ),
                 ),
               ),
