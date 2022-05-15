@@ -3,6 +3,7 @@ import 'package:wordpower_official_app/theme/colors.dart';
 import 'package:wordpower_official_app/widget/components/settings_component/account.dart';
 import 'package:wordpower_official_app/widget/components/settings_component/notification.dart';
 import 'package:wordpower_official_app/widget/components/settings_component/security.dart';
+import 'package:wordpower_official_app/widget/video_collection.dart';
 
 class Setting extends StatelessWidget {
   const Setting({Key key}) : super(key: key);
@@ -149,6 +150,25 @@ class Setting extends StatelessWidget {
                             ),
                           ),
                           leading: Icon(Icons.info_outline_rounded,
+                              color: Colors.white),
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (_) {
+                            return VideoCollection();
+                          }));
+                        },
+                        child: const ListTile(
+                          title: Text(
+                            "Video Player",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontFamily: "RedHatDisplay",
+                            ),
+                          ),
+                          leading: Icon(Icons.video_collection_sharp,
                               color: Colors.white),
                         ),
                       ),

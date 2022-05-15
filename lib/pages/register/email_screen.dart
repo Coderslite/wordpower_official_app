@@ -33,9 +33,10 @@ class _EmailScreenState extends State<EmailScreen> {
               padding: const EdgeInsets.all(15),
               child: Column(
                 children: [
-                  Text(
+                  const Text(
                     "Enter Email Address",
-                    style: TextStyle(color: Colors.white, fontSize: 20),
+                    style: TextStyle(color: Colors.white, fontSize: 20,
+          fontFamily: "RedHatDisplay",),
                   ),
                   SizedBox(
                     height: 20,
@@ -61,7 +62,9 @@ class _EmailScreenState extends State<EmailScreen> {
                       onSaved: (value) {
                         emailController.text = value;
                       },
-                      style: TextStyle(color: Colors.white, fontSize: 18),
+                      style: TextStyle(color: Colors.white, fontSize: 18,
+          fontFamily: "RedHatDisplay",
+                      ),
                       decoration: InputDecoration(
                         prefixIcon: Icon(
                           Icons.email_outlined,
@@ -84,6 +87,7 @@ class _EmailScreenState extends State<EmailScreen> {
                         hintStyle: TextStyle(
                           color: Colors.white.withOpacity(0.4),
                           fontSize: 15,
+          fontFamily: "RedHatDisplay",
                         ),
                       ),
                     ),
@@ -98,7 +102,9 @@ class _EmailScreenState extends State<EmailScreen> {
                       },
                       child: Text(
                         "Next",
-                        style: TextStyle(color: Colors.white),
+                        style: TextStyle(color: Colors.white,
+          fontFamily: "RedHatDisplay",
+                        ),
                       ),
                       style: ElevatedButton.styleFrom(
                         primary: Colors.blue,
@@ -119,7 +125,7 @@ class _EmailScreenState extends State<EmailScreen> {
       // Fluttertoast.showToast(msg: email);
       Navigator.of(context).pushReplacement(MaterialPageRoute(
           builder: (context) => PasswordScreen(email: email,
-              )));
+              ),),);
     }
     else{
       Fluttertoast.showToast(msg: "Something went wrong");

@@ -10,6 +10,7 @@ class YoutubeView extends StatefulWidget {
 }
 
 class _YoutubeViewState extends State<YoutubeView> {
+  final ScrollController _scrollController = ScrollController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,7 +19,7 @@ class _YoutubeViewState extends State<YoutubeView> {
         children: [
           Flexible(
             child: Container(
-                margin: EdgeInsets.symmetric(horizontal: 4),
+                margin: const EdgeInsets.symmetric(horizontal: 4),
                 child: StreamBuilder<QuerySnapshot>(
                     stream: FirebaseFirestore.instance
                         .collection("youtube_videos")
@@ -34,8 +35,9 @@ class _YoutubeViewState extends State<YoutubeView> {
                         );
                       } else if (snapshot.hasData || snapshot.data != null) {
                         return ListView.builder(
+                            controller: _scrollController,
                             shrinkWrap: true,
-                            itemCount: snapshot.data?.docs.length,
+                            itemCount: snapshot.data?.docs?.length,
                             itemBuilder: (BuildContext context, int index) {
                               QueryDocumentSnapshot<Object> documentSnapshot =
                                   snapshot.data?.docs[index];
@@ -59,18 +61,18 @@ class _YoutubeViewState extends State<YoutubeView> {
                                   subtitle: Text(
                                     documentSnapshot["description"],
                                     style: const TextStyle(
-                                      color: Colors.white,
+                                      color: Colors.white70,
                                       fontFamily: "RedHatDisplay",
                                     ),
                                   ),
                                   autofocus: false,
-                                  trailing: Icon(
+                                  trailing: const Icon(
                                     Icons.play_arrow_outlined,
                                     color: Colors.white,
                                   ),
                                   leading: Text(
                                     (index + 1).toString(),
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       color: Colors.white,
                                       fontFamily: "RedHatDisplay",
                                     ),

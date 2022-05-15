@@ -3,12 +3,13 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:wordpower_official_app/admin/admin_home.dart';
 import 'package:wordpower_official_app/pages/register/register_screen.dart';
 import 'package:wordpower_official_app/pages/root_app.dart';
 // import 'package:wordpower_official_app/theme/colors.dart';
-import 'package:wordpower_official_app/widget/login/forget_password.dart';
+import 'package:wordpower_official_app/pages/forget_password/forget_password.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key key}) : super(key: key);
@@ -22,8 +23,8 @@ class _LoginScreenState extends State<LoginScreen> {
   //form key
   final _formKey = GlobalKey<FormState>();
   bool _isloading = false;
-  final TextEditingController emailController = new TextEditingController();
-  final TextEditingController passwordController = new TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
   CollectionReference users = FirebaseFirestore.instance.collection('users');
 
   // firebase
@@ -43,17 +44,19 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Container(
+                SizedBox(
                   width: 100,
                   child: Image.asset("images/logo.png"),
                 ),
-                Container(
-                  child: Text(
-                    "Wordpower Ministry",
-                    style: TextStyle(color: Colors.white, fontSize: 25),
+                const Text(
+                  "Wordpower Ministry",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 25,
+                    fontFamily: "RedHatDisplay",
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 30,
                 ),
                 Padding(
@@ -76,10 +79,17 @@ class _LoginScreenState extends State<LoginScreen> {
                     onSaved: (value) {
                       emailController.text = value;
                     },
-                    style: const TextStyle(color: Colors.white, fontSize: 18),
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontFamily: "RedHatDisplay",
+                    ),
                     decoration: InputDecoration(
                       labelText: 'Email',
-                      labelStyle: const TextStyle(color: Colors.white38),
+                      labelStyle: const TextStyle(
+                        color: Colors.white38,
+                        fontFamily: "RedHatDisplay",
+                      ),
                       prefixIcon: Icon(Icons.email_outlined,
                           color: Colors.white.withOpacity(0.4)),
                       border: UnderlineInputBorder(
@@ -98,11 +108,12 @@ class _LoginScreenState extends State<LoginScreen> {
                       hintStyle: TextStyle(
                         color: Colors.white.withOpacity(0.4),
                         fontSize: 15,
+                        fontFamily: "RedHatDisplay",
                       ),
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 Padding(
@@ -110,23 +121,31 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: TextFormField(
                     controller: passwordController,
                     validator: (value) {
-                      RegExp regex = new RegExp(r'^.{6,}$');
+                      RegExp regex = RegExp(r'^.{6,}$');
                       if (value.isEmpty) {
                         return ("Please enter your password");
                       }
                       if (!regex.hasMatch(value)) {
                         return ("Please Enter Valid Password(Min, 6 Character");
                       }
+                      return null;
                     },
                     autofocus: false,
                     obscureText: _isObscure,
                     onSaved: (value) {
                       passwordController.text = value;
                     },
-                    style: TextStyle(color: Colors.white, fontSize: 18),
+                    style:const TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontFamily: "RedHatDisplay",
+                    ),
                     decoration: InputDecoration(
                       labelText: 'Password',
-                      labelStyle: const TextStyle(color: Colors.white38),
+                      labelStyle: const TextStyle(
+                        color: Colors.white38,
+                        fontFamily: "RedHatDisplay",
+                      ),
                       suffixIcon: IconButton(
                         icon: Icon(
                           _isObscure ? Icons.visibility : Icons.visibility_off,
@@ -157,7 +176,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 // Container(
@@ -179,12 +198,12 @@ class _LoginScreenState extends State<LoginScreen> {
                 // ),
                 Padding(
                   padding: const EdgeInsets.only(left: 40, right: 40),
-                  child: Container(
+                  child: SizedBox(
                     width: double.infinity,
                     child: _isloading
                         ? Center(
                             child: Column(
-                              children: [
+                              children: const [
                                 SizedBox(
                                   height: 10,
                                 ),
@@ -201,18 +220,21 @@ class _LoginScreenState extends State<LoginScreen> {
                                 signIn(emailController.text,
                                     passwordController.text);
                               },
-                              child: Text(
+                              child: const Text(
                                 "Sign in",
-                                style: TextStyle(color: Colors.white),
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontFamily: "RedHatDisplay",
+                                ),
                               ),
                             ),
                           ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
-                Container(
+                SizedBox(
                   width: size.width - 70,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -220,40 +242,48 @@ class _LoginScreenState extends State<LoginScreen> {
                       Text(
                         "Forgot your login information ?",
                         style: TextStyle(
-                            color: Colors.white.withOpacity(0.7), fontSize: 12),
+                          color: Colors.white.withOpacity(0.7),
+                          fontSize: 12,
+                          fontFamily: "RedHatDisplay",
+                        ),
                       ),
-                      SizedBox(width: 5),
+                      const SizedBox(width: 5),
                       GestureDetector(
                         onTap: () {
                           Navigator.pushReplacement(context,
                               MaterialPageRoute(builder: (_) {
-                            return ForgetPassword();
+                            return const ForgetPassword();
                           }));
                         },
-                        child: Text(
+                        child:const Text(
                           "Click here",
-                          style: TextStyle(color: Colors.white, fontSize: 12),
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 12,
+                            fontFamily: "RedHatDisplay",
+                          ),
                         ),
                       )
                     ],
                   ),
                 ),
 
-                SizedBox(
+                const SizedBox(
                   height: 40,
                 ),
-                Container(
-                  child: GestureDetector(
-                    child: Text(
-                      "Create a new Account",
-                      style: TextStyle(color: Colors.white),
+                GestureDetector(
+                  child:const Text(
+                    "Create a new Account",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontFamily: "RedHatDisplay",
                     ),
-                    onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (_) {
-                        return RegisterScreen();
-                      }));
-                    },
                   ),
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (_) {
+                      return const RegisterScreen();
+                    }));
+                  },
                 )
               ],
             ),

@@ -23,11 +23,11 @@ class _YoutubeFullScreenState extends State<YoutubeFullScreen> {
           builder:
               (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
             if (snapshot.hasError) {
-              return Text("Something went wrong");
+              return const Text("Something went wrong");
             }
 
             if (snapshot.hasData && !snapshot.data.exists) {
-              return Text("Document does not exist");
+              return const Text("Document does not exist");
             }
             if (snapshot.connectionState == ConnectionState.done) {
               Map<String, dynamic> data =
@@ -36,7 +36,7 @@ class _YoutubeFullScreenState extends State<YoutubeFullScreen> {
                 controller: YoutubePlayerController(
                   initialVideoId:
                       (data != null) ? (widget.item.toString()) : "",
-                  flags: YoutubePlayerFlags(
+                  flags: const YoutubePlayerFlags(
                     enableCaption: true,
                     // controlsVisibleAtStart: true,
                     // hideControls: true,
@@ -44,7 +44,7 @@ class _YoutubeFullScreenState extends State<YoutubeFullScreen> {
                 ),
                 showVideoProgressIndicator: true,
                 progressIndicatorColor: Colors.blue,
-                progressColors: ProgressBarColors(
+                progressColors: const ProgressBarColors(
                   playedColor: Colors.red,
                   handleColor: Colors.redAccent,
                   bufferedColor: Colors.yellow,
@@ -52,7 +52,7 @@ class _YoutubeFullScreenState extends State<YoutubeFullScreen> {
               );
             }
 
-            return Text("loading");
+            return const Text("loading");
           },
         ),
       ),

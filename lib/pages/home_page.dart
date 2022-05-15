@@ -9,7 +9,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:progress_indicators/progress_indicators.dart';
 import 'package:wordpower_official_app/constant/story_json.dart';
 import 'package:wordpower_official_app/theme/colors.dart';
 import 'package:wordpower_official_app/widget/post_screen.dart';
@@ -218,7 +217,7 @@ class _HomePageState extends State<HomePage> {
                           ],
                         ),
                       ),
-                      const StoryListCollection(),
+                      // const StoryListCollection(),
                     ],
                   ),
                 ),

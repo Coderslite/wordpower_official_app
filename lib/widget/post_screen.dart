@@ -28,11 +28,11 @@ class PostItem extends StatefulWidget {
 }
 
 class _PostItemState extends State<PostItem> {
+  final ScrollController _scrollController = ScrollController();
   List postLiked = [];
   List imageList = [];
   int _current = 0;
   final CarouselController _controller = CarouselController();
-  FirebaseAuth _auth = FirebaseAuth.instance;
   User user = FirebaseAuth.instance.currentUser;
   final formKey = GlobalKey<FormState>();
   final TextEditingController _messageController = TextEditingController();
@@ -83,376 +83,393 @@ class _PostItemState extends State<PostItem> {
               ),
             );
           } else if (snapshot2.hasData || snapshot2.data != null) {
-            return Column(
-                children: List.generate(snapshot2.data.docs.length, (index) {
-              // print(snapshot.data!.docs.length);
-              QueryDocumentSnapshot<Object> documentSnapshot =
-                  snapshot2.data?.docs[index];
-              imageList = (documentSnapshot["imageUrl"]);
-              (documentSnapshot["postLiked"]) != null
-                  ? postLiked = (documentSnapshot["postLiked"])
-                  : postLiked = [];
-              return Padding(
-                padding: const EdgeInsets.only(bottom: 10),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 10, horizontal: 15),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
+            return Column(children: [
+              ListView.builder(
+                controller: _scrollController,
+                shrinkWrap: true,
+                itemCount: snapshot2.data?.docs?.length,
+                itemBuilder: (BuildContext context, int index) {
+                  // print(snapshot.data!.docs.length);
+                  QueryDocumentSnapshot<Object> documentSnapshot =
+                      snapshot2.data?.docs[index];
+                  imageList = (documentSnapshot["imageUrl"]);
+                  (documentSnapshot["postLiked"]) != null
+                      ? postLiked = (documentSnapshot["postLiked"])
+                      : postLiked = [];
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 10),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 15),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Container(
-                                width: 40,
-                                height: 40,
-                                decoration: const BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  image: DecorationImage(
-                                      image: NetworkImage(
-                                          'https://firebasestorage.googleapis.com/v0/b/wordpower-ministry-app.appspot.com/o/logo%2Flogo.png?alt=media&token=4e35bf75-17c6-455b-bedf-46c2dfb4dfb5'),
-                                      fit: BoxFit.cover),
-                                ),
+                              Row(
+                                children: [
+                                  Container(
+                                    width: 40,
+                                    height: 40,
+                                    decoration: const BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      image: DecorationImage(
+                                          image: NetworkImage(
+                                              'https://firebasestorage.googleapis.com/v0/b/wordpower-ministry-app.appspot.com/o/logo%2Flogo.png?alt=media&token=4e35bf75-17c6-455b-bedf-46c2dfb4dfb5'),
+                                          fit: BoxFit.cover),
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    width: 15,
+                                  ),
+                                  const Text(
+                                    "Wordpower Ministry",
+                                    style: TextStyle(
+                                      color: white,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w500,
+                                      fontFamily: "RedHatDisplay",
+                                    ),
+                                  ),
+                                ],
                               ),
-                              const SizedBox(
-                                width: 15,
-                              ),
-                              const Text(
-                                "Wordpower Ministry",
-                                style: TextStyle(
+                              IconButton(
+                                icon: const Icon(
+                                  LineIcons.horizontalEllipsis,
                                   color: white,
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w500,
-                                  fontFamily: "RedHatDisplay",
                                 ),
+                                onPressed: () {
+                                  showBottomSheet(
+                                      context,
+                                      (documentSnapshot != null)
+                                          ? (documentSnapshot["imageUrl"]
+                                              [index])
+                                          : "",
+                                      (documentSnapshot != null)
+                                          ? (documentSnapshot["postId"][index])
+                                          : "",
+                                      (documentSnapshot != null)
+                                          ? (documentSnapshot["description"]
+                                              [index])
+                                          : "");
+                                },
                               ),
                             ],
                           ),
-                          IconButton(
-                            icon: const Icon(
-                              LineIcons.horizontalEllipsis,
-                              color: white,
+                        ),
+                        const SizedBox(
+                          height: 1,
+                        ),
+                        SizedBox(
+                          width: double.infinity,
+                          height: 300,
+                          child: GestureDetector(
+                            child: Container(
+                              child: imageList.length <= 1
+                                  ? InteractiveViewer(
+                                      child: CachedNetworkImage(
+                                        imageUrl: imageList[0],
+                                        progressIndicatorBuilder:
+                                            (context, url, downloadProgress) =>
+                                                JumpingDotsProgressIndicator(
+                                          fontSize: 20.0,
+                                          color: Colors.blue,
+                                        ),
+                                        errorWidget: (context, url, error) =>
+                                            const Icon(Icons.error),
+                                      ),
+                                    )
+                                  : carouselSlider(),
                             ),
-                            onPressed: () {
-                              showBottomSheet(
-                                  context,
-                                  (documentSnapshot != null)
-                                      ? (documentSnapshot["imageUrl"][index])
-                                      : "",
-                                  (documentSnapshot != null)
-                                      ? (documentSnapshot["postId"][index])
-                                      : "",
-                                  (documentSnapshot != null)
-                                      ? (documentSnapshot["description"][index])
-                                      : "");
+                            // onTap: () {
+                            //   Navigator.push(context, MaterialPageRoute(builder: (_) {
+                            //     return PostImageList(
+                            //         postId: widget.id, imageList:widget.imgList);
+                            //   }));
+                            //   // Navigator.push(context, MaterialPageRoute(builder: (_) {
+                            //   //   return DetailScreen(postImg: widget.postImg, id: widget.id);
+                            //   // }));
+                            // },
+                            onLongPress: () {
+                              handleLiked((documentSnapshot["postId"]),
+                                  user.uid, postLiked);
                             },
                           ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 1,
-                    ),
-                    SizedBox(
-                      width: double.infinity,
-                      height: 300,
-                      child: GestureDetector(
-                        child: Container(
-                          child: imageList.length <= 1
-                              ? InteractiveViewer(
-                                  child: CachedNetworkImage(
-                                    imageUrl: imageList[0],
-                                    progressIndicatorBuilder:
-                                        (context, url, downloadProgress) =>
-                                            JumpingDotsProgressIndicator(
-                                      fontSize: 20.0,
-                                      color: Colors.blue,
-                                    ),
-                                    errorWidget: (context, url, error) =>
-                                        Icon(Icons.error),
-                                  ),
-                                )
-                              : carouselSlider(),
                         ),
-                        // onTap: () {
-                        //   Navigator.push(context, MaterialPageRoute(builder: (_) {
-                        //     return PostImageList(
-                        //         postId: widget.id, imageList:widget.imgList);
-                        //   }));
-                        //   // Navigator.push(context, MaterialPageRoute(builder: (_) {
-                        //   //   return DetailScreen(postImg: widget.postImg, id: widget.id);
-                        //   // }));
-                        // },
-                        onLongPress: () {
-                          handleLiked((documentSnapshot["postId"]), user.uid,
-                              postLiked);
-                        },
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Padding(
-                      padding:
-                          const EdgeInsets.only(left: 15, right: 15, top: 3),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              left: 15, right: 15, top: 3),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              postLiked.contains(user.uid)
+                              Row(
+                                children: [
+                                  postLiked.contains(user.uid)
+                                      ? IconButton(
+                                          onPressed: () {
+                                            handleUnliked(
+                                                (documentSnapshot["postId"]),
+                                                user.uid,
+                                                postLiked);
+                                          },
+                                          icon: const Icon(
+                                            CupertinoIcons.heart_solid,
+                                            size: 27,
+                                            color: Colors.red,
+                                          ),
+                                        )
+                                      : IconButton(
+                                          onPressed: () {
+                                            handleLiked(
+                                                (documentSnapshot["postId"]),
+                                                user.uid,
+                                                postLiked);
+                                          },
+                                          icon: const Icon(
+                                            CupertinoIcons.heart,
+                                            size: 27,
+                                            color: white,
+                                          ),
+                                        ),
+                                  const SizedBox(
+                                    width: 20,
+                                  ),
+                                  GestureDetector(
+                                      onTap: () {
+                                        Navigator.push(context,
+                                            MaterialPageRoute(builder: (_) {
+                                          return CommentViewScreen(
+                                              postId:
+                                                  documentSnapshot["postId"],
+                                              profileImage:
+                                                  widget.profileImage);
+                                        }));
+                                      },
+                                      child: const Icon(
+                                          CupertinoIcons.chat_bubble,
+                                          size: 27,
+                                          color: Colors.white)),
+                                  const SizedBox(
+                                    width: 20,
+                                  ),
+                                  GestureDetector(
+                                    child: const Icon(
+                                      CupertinoIcons.share,
+                                      color: Colors.white,
+                                      size: 27,
+                                    ),
+                                    onTap: () => shareModal(context),
+                                  ),
+                                ],
+                              ),
+                              // SvgPicture.asset(
+                              //   "images/bookmark_icon.svg",
+                              //   color: Colors.white,
+                              //   width: 25,
+                              // )
+                              widget.postSaved
+                                      .contains(documentSnapshot['postId'])
                                   ? IconButton(
                                       onPressed: () {
-                                        handleUnliked(
-                                            (documentSnapshot["postId"]),
-                                            user.uid,
-                                            postLiked);
+                                        handleUnsavedPost(user.uid,
+                                            documentSnapshot['postId']);
                                       },
-                                      icon: Icon(
-                                        CupertinoIcons.heart_solid,
-                                        size: 27,
+                                      icon: const Icon(
+                                        CupertinoIcons.bookmark_solid,
                                         color: Colors.red,
+                                        size: 25,
                                       ),
                                     )
                                   : IconButton(
                                       onPressed: () {
-                                        handleLiked(
-                                            (documentSnapshot["postId"]),
-                                            user.uid,
-                                            postLiked);
+                                        handleSavedPost(user.uid,
+                                            documentSnapshot['postId']);
                                       },
-                                      icon: Icon(
-                                        CupertinoIcons.heart,
-                                        size: 27,
-                                        color: white,
+                                      icon: const Icon(
+                                        CupertinoIcons.bookmark,
+                                        color: Colors.white,
+                                        size: 25,
                                       ),
-                                    ),
-                              const SizedBox(
-                                width: 20,
-                              ),
-                              GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(context,
-                                        MaterialPageRoute(builder: (_) {
-                                      return CommentViewScreen(
-                                          postId: documentSnapshot["postId"],
-                                          profileImage: widget.profileImage);
-                                    }));
-                                  },
-                                  child: Icon(CupertinoIcons.chat_bubble,
-                                      size: 27, color: Colors.white)),
-                              const SizedBox(
-                                width: 20,
-                              ),
-                              GestureDetector(
-                                child: Icon(
-                                  CupertinoIcons.share,
-                                  color: Colors.white,
-                                  size: 27,
-                                ),
-                                onTap: () => shareModal(context),
-                              ),
-                            ],
-                          ),
-                          // SvgPicture.asset(
-                          //   "images/bookmark_icon.svg",
-                          //   color: Colors.white,
-                          //   width: 25,
-                          // )
-                          widget.postSaved.contains(documentSnapshot['postId'])
-                              ? IconButton(
-                                  onPressed: () {
-                                    handleUnsavedPost(
-                                        user.uid, documentSnapshot['postId']);
-                                  },
-                                  icon: Icon(
-                                    CupertinoIcons.bookmark_solid,
-                                    color: Colors.red,
-                                    size: 25,
-                                  ),
-                                )
-                              : IconButton(
-                                  onPressed: () {
-                                    handleSavedPost(
-                                        user.uid, documentSnapshot['postId']);
-                                  },
-                                  icon: Icon(
-                                    CupertinoIcons.bookmark,
-                                    color: Colors.white,
-                                    size: 25,
-                                  ),
-                                )
-                        ],
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 12,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        left: 15,
-                        right: 15,
-                      ),
-                      child: postLiked.length < 2
-                          ? Text(
-                              postLiked.length.toString() + " like",
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontFamily: "RedHatDisplay",
-                              ),
-                            )
-                          : Text(
-                              postLiked.length.toString() + " likes",
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontFamily: "RedHatDisplay",
-                              ),
-                            ),
-                    ),
-                    const SizedBox(
-                      height: 12,
-                    ),
-                    Padding(
-                        padding: const EdgeInsets.only(left: 15, right: 15),
-                        child: postLiked.length == 0
-                            ? Text(
-                                "",
-                                style: TextStyle(color: Colors.white),
-                              )
-                            : Text(
-                                "",
-                                style: TextStyle(color: Colors.white),
-                              )),
-                    const SizedBox(
-                      height: 12,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        left: 15,
-                        right: 15,
-                      ),
-                      child: SizedBox(
-                        width: double.infinity,
-                        child: GestureDetector(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                (documentSnapshot["description"]),
-                                // trimLines: 2,
-                                // trimMode: TrimMode.Line,
-                                // trimCollapsedText: '.... show more',
-                                // trimExpandedText: '.... show less',
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontFamily: "RedHatDisplay",
-                                ),
-                              ),
+                                    )
                             ],
                           ),
                         ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 35,
-                    ),
-                    commentList(
-                        documentSnapshot: documentSnapshot, widget: widget),
-                    const SizedBox(
-                      height: 12,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 15, right: 15),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              Container(
-                                width: 30,
-                                height: 30,
-                                decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    image: DecorationImage(
-                                        image:
-                                            NetworkImage(widget.profileImage),
-                                        fit: BoxFit.cover)),
-                              ),
-                              const SizedBox(width: 10),
-                              SizedBox(
-                                width: size.width - 140,
-                                // height: 55,
-                                child: TextField(
-                                  controller: _messageController,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      _message = value;
-                                    });
-                                  },
-                                  minLines: 1,
-                                  maxLines: 5,
-                                  style: const TextStyle(color: Colors.white),
-                                  decoration: InputDecoration(
-                                    hintText: "Add your comments",
-                                    hintStyle: TextStyle(
-                                      color: Colors.white54,
+                        const SizedBox(
+                          height: 12,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            left: 15,
+                            right: 15,
+                          ),
+                          child: postLiked.length < 2
+                              ? Text(
+                                  postLiked.length.toString() + " like",
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: "RedHatDisplay",
+                                  ),
+                                )
+                              : Text(
+                                  postLiked.length.toString() + " likes",
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: "RedHatDisplay",
+                                  ),
+                                ),
+                        ),
+                        const SizedBox(
+                          height: 12,
+                        ),
+                        Padding(
+                            padding: const EdgeInsets.only(left: 15, right: 15),
+                            child: postLiked.isEmpty
+                                ? const Text(
+                                    "",
+                                    style: TextStyle(color: Colors.white),
+                                  )
+                                : const Text(
+                                    "",
+                                    style: TextStyle(color: Colors.white),
+                                  )),
+                        const SizedBox(
+                          height: 12,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            left: 15,
+                            right: 15,
+                          ),
+                          child: SizedBox(
+                            width: double.infinity,
+                            child: GestureDetector(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    (documentSnapshot["description"]),
+                                    // trimLines: 2,
+                                    // trimMode: TrimMode.Line,
+                                    // trimCollapsedText: '.... show more',
+                                    // trimExpandedText: '.... show less',
+                                    style: const TextStyle(
+                                      color: Colors.white,
                                       fontFamily: "RedHatDisplay",
                                     ),
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(5),
-                                      borderSide: BorderSide.none,
-                                    ),
-                                    contentPadding: const EdgeInsets.all(10),
                                   ),
-                                ),
+                                ],
                               ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 35,
+                        ),
+                        commentList(
+                            documentSnapshot: documentSnapshot, widget: widget),
+                        const SizedBox(
+                          height: 12,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 15, right: 15),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  Container(
+                                    width: 30,
+                                    height: 30,
+                                    decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        image: DecorationImage(
+                                            image: NetworkImage(
+                                                widget.profileImage),
+                                            fit: BoxFit.cover)),
+                                  ),
+                                  const SizedBox(width: 10),
+                                  SizedBox(
+                                    width: size.width - 140,
+                                    // height: 55,
+                                    child: TextField(
+                                      controller: _messageController,
+                                      onChanged: (value) {
+                                        setState(() {
+                                          _message = value;
+                                        });
+                                      },
+                                      minLines: 1,
+                                      maxLines: 5,
+                                      style:
+                                          const TextStyle(color: Colors.white),
+                                      decoration: InputDecoration(
+                                        hintText: "Add your comments",
+                                        hintStyle: const TextStyle(
+                                          color: Colors.white54,
+                                          fontFamily: "RedHatDisplay",
+                                        ),
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                          borderSide: BorderSide.none,
+                                        ),
+                                        contentPadding:
+                                            const EdgeInsets.all(10),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  const SizedBox(width: 1),
+                                  IconButton(
+                                    icon: _message == null || _message.isEmpty
+                                        ? Icon(Icons.add_circle,
+                                            color:
+                                                Colors.white.withOpacity(0.3),
+                                            size: 18)
+                                        : const Icon(Icons.add_circle,
+                                            color: Colors.blue, size: 18),
+                                    onPressed: () {
+                                      _message == null || _message.isEmpty
+                                          ? null
+                                          : handleAddComment(
+                                              _messageController.text,
+                                              (documentSnapshot["postId"]),
+                                              widget.profileImage);
+                                    },
+                                  ),
+                                ],
+                              )
                             ],
                           ),
-                          Row(
-                            children: [
-                              const SizedBox(width: 1),
-                              IconButton(
-                                icon: _message == null || _message.isEmpty
-                                    ? Icon(Icons.add_circle,
-                                        color: Colors.white.withOpacity(0.3),
-                                        size: 18)
-                                    : Icon(Icons.add_circle,
-                                        color: Colors.blue, size: 18),
-                                onPressed: () {
-                                  _message == null || _message.isEmpty
-                                      ? null
-                                      : handleAddComment(
-                                          _messageController.text,
-                                          (documentSnapshot["postId"]),
-                                          widget.profileImage);
-                                },
-                              ),
-                            ],
-                          )
-                        ],
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 15, right: 15),
-                      child: Text(
-                        "1 day ago",
-                        style: TextStyle(
-                          color: Colors.white.withOpacity(0.5),
-                          fontSize: 10,
-                          fontWeight: FontWeight.w500,
-                          fontFamily: "RedHatDisplay",
                         ),
-                      ),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 15, right: 15),
+                          child: Text(
+                            "1 day ago",
+                            style: TextStyle(
+                              color: Colors.white.withOpacity(0.5),
+                              fontSize: 10,
+                              fontWeight: FontWeight.w500,
+                              fontFamily: "RedHatDisplay",
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-              );
-            }));
+                  );
+                },
+              ),
+            ]);
           }
           return const Center(
             child: CircularProgressIndicator(
@@ -481,56 +498,54 @@ class _PostItemState extends State<PostItem> {
           items: imageList
               .map(
                 (item) => Container(
-                  child: Container(
-                    margin: EdgeInsets.all(5.0),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                      child: Stack(
-                        children: <Widget>[
-                          InteractiveViewer(
-                            child: CachedNetworkImage(
-                              imageUrl: item,
-                              fit: BoxFit.cover,
-                              width: 1000,
-                              progressIndicatorBuilder:
-                                  (context, url, downloadProgress) =>
-                                      JumpingDotsProgressIndicator(
-                                fontSize: 20.0,
-                                color: Colors.blue,
-                              ),
-                              errorWidget: (context, url, error) =>
-                                  Icon(Icons.error),
+                  margin: const EdgeInsets.all(5.0),
+                  child: ClipRRect(
+                    borderRadius: const BorderRadius.all(Radius.circular(5.0)),
+                    child: Stack(
+                      children: <Widget>[
+                        InteractiveViewer(
+                          child: CachedNetworkImage(
+                            imageUrl: item,
+                            fit: BoxFit.cover,
+                            width: 1000,
+                            progressIndicatorBuilder:
+                                (context, url, downloadProgress) =>
+                                    JumpingDotsProgressIndicator(
+                              fontSize: 20.0,
+                              color: Colors.blue,
                             ),
+                            errorWidget: (context, url, error) =>
+                                const Icon(Icons.error),
                           ),
-                          Positioned(
-                            bottom: 0.0,
-                            left: 0.0,
-                            right: 0.0,
-                            child: Container(
-                              decoration: const BoxDecoration(
-                                gradient: LinearGradient(
-                                  colors: [
-                                    Color.fromARGB(200, 0, 0, 0),
-                                    Color.fromARGB(0, 0, 0, 0)
-                                  ],
-                                  begin: Alignment.bottomCenter,
-                                  end: Alignment.topCenter,
-                                ),
+                        ),
+                        Positioned(
+                          bottom: 0.0,
+                          left: 0.0,
+                          right: 0.0,
+                          child: Container(
+                            decoration: const BoxDecoration(
+                              gradient: LinearGradient(
+                                colors: [
+                                  Color.fromARGB(200, 0, 0, 0),
+                                  Color.fromARGB(0, 0, 0, 0)
+                                ],
+                                begin: Alignment.bottomCenter,
+                                end: Alignment.topCenter,
                               ),
-                              padding: EdgeInsets.symmetric(
-                                  vertical: 10.0, horizontal: 20.0),
-                              // child: Text(
-                              //   'No. ${imgList.indexOf(item)} image',
-                              //   style: TextStyle(
-                              //     color: Colors.white,
-                              //     fontSize: 20.0,
-                              //     fontWeight: FontWeight.bold,
-                              //   ),
-                              // ),
                             ),
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 10.0, horizontal: 20.0),
+                            // child: Text(
+                            //   'No. ${imgList.indexOf(item)} image',
+                            //   style: TextStyle(
+                            //     color: Colors.white,
+                            //     fontSize: 20.0,
+                            //     fontWeight: FontWeight.bold,
+                            //   ),
+                            // ),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                 ),

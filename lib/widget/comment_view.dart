@@ -80,7 +80,7 @@ class _CommentViewScreenState extends State<CommentViewScreen> {
               child: StreamBuilder<QuerySnapshot>(
                   stream: FirebaseFirestore.instance
                       .collection('comments')
-                      .where("postId", isEqualTo: widget.postId ?? null)
+                      .where("postId", isEqualTo: widget.postId)
                       .snapshots(),
                   builder: (BuildContext context, snapshot) {
                     if (snapshot.hasError) {

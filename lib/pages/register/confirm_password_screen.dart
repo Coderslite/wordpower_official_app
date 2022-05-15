@@ -59,7 +59,9 @@ class _ConfirmPasswordScreenState extends State<ConfirmPasswordScreen> {
                 children: [
                   Text(
                     "Confirm Password",
-                    style: TextStyle(color: Colors.white, fontSize: 20),
+                    style: TextStyle(color: Colors.white, fontSize: 20,
+          fontFamily: "RedHatDisplay",
+                    ),
                   ),
                   SizedBox(
                     height: 20,
@@ -87,10 +89,14 @@ class _ConfirmPasswordScreenState extends State<ConfirmPasswordScreen> {
                       onSaved: (value) {
                         passwordConfirmController.text = value;
                       },
-                      style: TextStyle(color: Colors.white, fontSize: 18),
+                      style: TextStyle(color: Colors.white, fontSize: 18,
+          fontFamily: "RedHatDisplay",
+                      ),
                       decoration: InputDecoration(
                         labelText: 'Password',
-                        labelStyle: const TextStyle(color: Colors.white38),
+                        labelStyle: const TextStyle(color: Colors.white38,
+          fontFamily: "RedHatDisplay",
+                        ),
                         prefixIcon: Icon(
                           Icons.vpn_key_outlined,
                           color: Colors.white.withOpacity(0.4),
@@ -146,6 +152,8 @@ class _ConfirmPasswordScreenState extends State<ConfirmPasswordScreen> {
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 12,
+          fontFamily: "RedHatDisplay",
+
                           ),
                         ),
                       ],
@@ -173,7 +181,9 @@ class _ConfirmPasswordScreenState extends State<ConfirmPasswordScreen> {
                             },
                             child: Text(
                               "Submit",
-                              style: TextStyle(color: Colors.white),
+                              style: TextStyle(color: Colors.white,
+          fontFamily: "RedHatDisplay",
+                              ),
                             ),
                             style: ElevatedButton.styleFrom(
                               primary: Colors.blue,

@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:progress_indicators/progress_indicators.dart';
 import 'package:wordpower_official_app/theme/colors.dart';
@@ -24,14 +23,14 @@ class StoryItem extends StatelessWidget {
       child: FutureBuilder(
           future: FirebaseFirestore.instance
               .collection("story_collection")
-              .doc(userId ?? null)
-              .collection(userId ?? null)
+              .doc(userId)
+              .collection(userId)
               .orderBy("time", descending: false)
               .get(),
-          builder: (context, snapshot) {
-            List<QueryDocumentSnapshot<Object>> data = snapshot.data.docs;
-            int storyLength = snapshot.data.docs.length;
-            if (snapshot.hasError) {
+          builder: (context, storysnapshot) {
+            List<QueryDocumentSnapshot<Object>> data = storysnapshot.data.docs;
+            int storyLength = storysnapshot.data.docs.length;
+            if (storysnapshot.hasError) {
               return const Text(
                 "Something went wrong",
                 style: TextStyle(
@@ -40,7 +39,7 @@ class StoryItem extends StatelessWidget {
                 ),
               );
             }
-            if (!snapshot.hasData) {
+            if (!storysnapshot.hasData) {
               return const Text(
                 "No stories",
                 style: TextStyle(
@@ -49,12 +48,17 @@ class StoryItem extends StatelessWidget {
                 ),
               );
             }
-            if (snapshot.hasData) {
+            if (storysnapshot.hasData) {
               return GestureDetector(
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (_) {
-                    return StoryDisplay(userId: userId);
-                  }));
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) {
+                        return StoryDisplay(userId: userId);
+                      },
+                    ),
+                  );
                 },
                 child: Column(
                   children: [
@@ -160,7 +164,7 @@ class StoryItem extends StatelessWidget {
                               ),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 8.0,
                     ),
                     StreamBuilder(
@@ -186,7 +190,7 @@ class StoryItem extends StatelessWidget {
                               child: Text(
                                 data['name'] ?? "",
                                 overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   color: white,
                                   fontFamily: "RedHatDisplay",
                                 ),
@@ -199,7 +203,10 @@ class StoryItem extends StatelessWidget {
                 ),
               );
             }
-            return JumpingDotsProgressIndicator();
+            return const Text(
+              "loading",
+              style: TextStyle(fontFamily: "RedHatDisplay"),
+            );
           }),
     );
   }
