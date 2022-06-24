@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wordpower_official_app/constant/search_json.dart';
+import 'package:wordpower_official_app/pages/widget/search_category_item.dart';
 import 'package:wordpower_official_app/theme/colors.dart';
-import 'package:wordpower_official_app/widget/search_category_item.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({Key key}) : super(key: key);

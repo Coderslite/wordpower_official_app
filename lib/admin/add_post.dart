@@ -64,7 +64,7 @@ class _AddPostState extends State<AddPost> {
                         ),
                       ),
               ),
-              SizedBox(
+             const SizedBox(
                 height: 5,
               ),
               Text(
@@ -122,8 +122,8 @@ class _AddPostState extends State<AddPost> {
   }
 
   Future getSingleImage() async {
-    final pickedImage =
-        await singlePicker.pickImage(source: (ImageSource.gallery));
+    final pickedImage = await singlePicker.pickImage(
+        source: (ImageSource.gallery), imageQuality: 10,maxHeight: 300);
     setState(() {
       if (pickedImage != null) {
         singleImage = File(pickedImage.path);
@@ -142,13 +142,16 @@ class _AddPostState extends State<AddPost> {
   }
 
   Future getMultiImage() async {
-    final List<XFile> selectedImages = await multiPicker.pickMultiImage();
+    final List<XFile> selectedImages = await multiPicker.pickMultiImage(
+      imageQuality: 15,
+      maxHeight: 300,
+    );
     setState(() {
       if (selectedImages.isNotEmpty) {
         images.addAll(selectedImages);
       } else {
         print("No image is selected");
       }
-    });
+    },);
   }
 }

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
@@ -10,11 +11,12 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:wordpower_official_app/constant/story_json.dart';
+import 'package:wordpower_official_app/pages/root_app.dart';
+import 'package:wordpower_official_app/pages/widget/post_screen.dart';
+import 'package:wordpower_official_app/pages/widget/story/image_story.dart';
+import 'package:wordpower_official_app/pages/widget/story/story_list_collection.dart';
+import 'package:wordpower_official_app/pages/widget/story/text_story.dart';
 import 'package:wordpower_official_app/theme/colors.dart';
-import 'package:wordpower_official_app/widget/post_screen.dart';
-import 'package:wordpower_official_app/widget/story/image_story.dart';
-import 'package:wordpower_official_app/widget/story/story_list_collection.dart';
-import 'package:wordpower_official_app/widget/story/text_story.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key key}) : super(key: key);
@@ -137,98 +139,104 @@ class _HomePageState extends State<HomePage> {
               ? postSaved = data["postSaved"]
               : postSaved = [];
           myProfileImage = data["profileImage"];
-          return SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            right: 20, left: 15, bottom: 10),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            SizedBox(
-                              height: 65,
-                              width: 65,
-                              child: Stack(
-                                children: [
-                                  GestureDetector(
-                                    onTap: () {
-                                      setState(() {
-                                        uploadStatus = true;
-                                      });
-                                    },
-                                    child: Container(
-                                      height: 65,
-                                      width: 65,
-                                      decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        image: DecorationImage(
-                                          image: NetworkImage(
-                                            myProfileImage,
+          return RefreshIndicator(
+            onRefresh: () async {
+              await Future.delayed(const Duration(seconds: 2));
+              updateData();
+            },
+            child: SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              right: 20, left: 15, bottom: 10),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                height: 65,
+                                width: 65,
+                                child: Stack(
+                                  children: [
+                                    GestureDetector(
+                                      onTap: () {
+                                        setState(() {
+                                          uploadStatus = true;
+                                        });
+                                      },
+                                      child: Container(
+                                        height: 65,
+                                        width: 65,
+                                        decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          image: DecorationImage(
+                                            image: NetworkImage(
+                                              myProfileImage,
+                                            ),
+                                            fit: BoxFit.cover,
                                           ),
-                                          fit: BoxFit.cover,
                                         ),
                                       ),
                                     ),
-                                  ),
-                                  Positioned(
-                                    bottom: 0,
-                                    right: 0,
-                                    child: Container(
-                                      width: 19,
-                                      height: 19,
-                                      decoration: const BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: white,
-                                      ),
-                                      child: const Icon(
-                                        Icons.add_circle,
-                                        color: buttonFollowColor,
-                                        size: 19,
+                                    Positioned(
+                                      bottom: 0,
+                                      right: 0,
+                                      child: Container(
+                                        width: 19,
+                                        height: 19,
+                                        decoration: const BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          color: white,
+                                        ),
+                                        child: const Icon(
+                                          Icons.add_circle,
+                                          color: buttonFollowColor,
+                                          size: 19,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 8,
-                            ),
-                            SizedBox(
-                              width: 70,
-                              child: Text(
-                                name,
-                                overflow: TextOverflow.ellipsis,
-                                style: const TextStyle(
-                                  color: white,
-                                  fontFamily: "RedHatDisplay",
+                                  ],
                                 ),
                               ),
-                            ),
-                          ],
+                              const SizedBox(
+                                height: 8,
+                              ),
+                              SizedBox(
+                                width: 70,
+                                child: Text(
+                                  name,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: const TextStyle(
+                                    color: white,
+                                    fontFamily: "RedHatDisplay",
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                      // const StoryListCollection(),
-                    ],
+                        const StoryListCollection(),
+                      ],
+                    ),
                   ),
-                ),
-                Divider(
-                  color: white.withOpacity(0.3),
-                ),
-                PostItem(
-                  profileImage: myProfileImage,
-                  postSaved: postSaved,
-                ),
-              ],
+                  Divider(
+                    color: white.withOpacity(0.3),
+                  ),
+                  PostItem(
+                    profileImage: myProfileImage,
+                    postSaved: postSaved,
+                  ),
+                ],
+              ),
             ),
           );
         }
@@ -257,5 +265,17 @@ class _HomePageState extends State<HomePage> {
         }
       },
     );
+  }
+
+  void updateData() {
+    Timer.periodic(Duration(seconds: 2), (Timer timer) {
+      // int i = data.length+1;
+      // data.add("Flutter Tutorial $i");
+      timer.cancel();
+      // setState(() {});
+      Navigator.push(context, MaterialPageRoute(builder: (_) {
+        return RootApp();
+      }));
+    });
   }
 }

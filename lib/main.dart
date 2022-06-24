@@ -2,6 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:wordpower_official_app/onboarding/onboarding.dart';
 import 'package:wordpower_official_app/pages/login/login_screen.dart';
 import 'package:wordpower_official_app/pages/root_app.dart';
 // import 'dart:async';
@@ -9,39 +11,47 @@ import 'package:wordpower_official_app/pages/root_app.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  FirebaseAuth _auth = FirebaseAuth.instance;
-  User user = _auth.currentUser;
-  _auth.authStateChanges().listen((event) {
-    if (user == null) {
-      runApp(const Login());
-    } else {
-      runApp(const HomePage());
-    }
-  });
+  final prefs = await SharedPreferences.getInstance();
+  final showHome = prefs.getBool('showHome') ?? false;
+  // FirebaseAuth _auth = FirebaseAuth.instance;
+
+  runApp(HomePage(showHome: showHome));
+  // User user = _auth.currentUser;
+  // _auth.authStateChanges().listen((event) {
+  //   if (user == null) {
+  //     runApp(const Login());
+  //   } else {
+  //     runApp(const HomePage());
+  //   }
+  // });
 }
 
-class Login extends StatelessWidget {
-  const Login({Key key}) : super(key: key);
+// class Login extends StatelessWidget {
+//   const Login({Key key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-    ]);
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-    ]);
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Wordpower Ministry',
-      theme: ThemeData.dark(),
-      home: const LoginScreen(),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     // SystemChrome.setPreferredOrientations([
+//     //   DeviceOrientation.portraitUp,
+//     // ]);
+//     // SystemChrome.setPreferredOrientations([
+//     //   DeviceOrientation.portraitUp,
+//     // ]);
+//     return MaterialApp(
+//       debugShowCheckedModeBanner: false,
+//       title: 'Wordpower Ministry',
+//       theme: ThemeData.dark(),
+//       home: const LoginScreen(),
+//     );
+//   }
+// }
 
 class HomePage extends StatelessWidget {
-  const HomePage({Key key}) : super(key: key);
+  final bool showHome;
+  const HomePage({
+    Key key,
+    this.showHome,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +59,8 @@ class HomePage extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Wordpower Ministry',
       theme: ThemeData.dark(),
-      home: const RootApp(),
+      // home: showHome ? const RootApp() : const OnboardingScreen(),
+      home: const RootApp() ,
     );
   }
 }

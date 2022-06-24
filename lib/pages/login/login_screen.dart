@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:wordpower_official_app/admin/admin_home.dart';
 import 'package:wordpower_official_app/pages/register/register_screen.dart';
@@ -11,9 +11,8 @@ import 'package:wordpower_official_app/pages/root_app.dart';
 // import 'package:wordpower_official_app/theme/colors.dart';
 import 'package:wordpower_official_app/pages/forget_password/forget_password.dart';
 
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends StatefulWidget { 
   const LoginScreen({Key key}) : super(key: key);
-
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
@@ -319,7 +318,7 @@ class _LoginScreenState extends State<LoginScreen> {
             .collection("users")
             .doc(userID)
             .get()
-            .then((DocumentSnapshot snapshot) {
+            .then((DocumentSnapshot snapshot) async {
           // store the data for the user in an array
           Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
           if (data['role'] == 'admin') {
@@ -334,6 +333,8 @@ class _LoginScreenState extends State<LoginScreen> {
             setState(() {
               _isloading = false;
             });
+            final prefs = await SharedPreferences.getInstance();
+            prefs.setBool('showHome', true);
             Navigator.pushAndRemoveUntil(context,
                 MaterialPageRoute(builder: (_) {
               return const RootApp();

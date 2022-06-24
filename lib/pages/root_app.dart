@@ -5,11 +5,12 @@ import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:wordpower_official_app/pages/home_page.dart';
+import 'package:wordpower_official_app/pages/widget/appbar.dart';
+import 'package:wordpower_official_app/pages/widget/settings.dart';
+import 'package:wordpower_official_app/pages/widget/video_collection.dart';
 import 'package:wordpower_official_app/pages/youtube_page.dart';
 import 'package:wordpower_official_app/theme/colors.dart';
-import 'package:wordpower_official_app/widget/appbar.dart';
-import 'package:wordpower_official_app/widget/settings.dart';
-import 'package:wordpower_official_app/widget/story/image_story.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class RootApp extends StatefulWidget {
   const RootApp({Key key}) : super(key: key);
@@ -22,6 +23,42 @@ class _RootAppState extends State<RootApp> {
   int pageIndex = 0;
   File singleImage;
   final singlePicker = ImagePicker();
+
+    YoutubePlayerController _controller;
+    runYoutubePlayer() {
+    _controller = YoutubePlayerController(
+      initialVideoId: 'OQRzJEb1xVc',
+      flags: const YoutubePlayerFlags(
+        enableCaption: true,
+        autoPlay: false,
+        // controlsVisibleAtStart: true,
+        // hideControls: true,
+      ),
+    );
+    //
+    
+  @override
+  void initState() {
+    runYoutubePlayer();
+    super.initState();
+  }
+
+      @override
+  void deactivate() {
+    // Pauses video while navigating to next page.
+    _controller.pause();
+    super.deactivate();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    // _idController.dispose();
+    // _seekToController.dispose();
+    super.dispose();
+  }
+
+  }
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -40,7 +77,8 @@ class _RootAppState extends State<RootApp> {
     List<Widget> Pages = [
       const HomePage(),
       // SearchPage(),
-      const YoutubeView(),
+      // const YoutubeView(),
+      VideoCollection(),
       // Center(
       //   child: Text(
       //     "Youtube",
